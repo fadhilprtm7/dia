@@ -1,0 +1,46 @@
+body {
+    background-color: #FFFFFF; /* Putih bersih kesukaan dia */
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+.card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05); /* Shadow tipis estetik */
+    border: 1px solid #f0f0f0;
+}
+
+h1 {
+    color: #333;
+    margin-top: 20px;
+}
+
+p {
+    color: #777;
+}
+
+.rabbit-gif {
+    width: 150px;
+}
+
+.heart {
+    font-size: 30px;
+    margin-top: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
