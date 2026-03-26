@@ -8,13 +8,45 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#story">Our Story</a>
+        <a href="#question">The Question</a>
+    </nav>
+
+    <section id="home" class="full-height">
         <div class="card">
-            <img src="https://i.pinimg.com/originals/11/4d/9d/114d9d4d543e0e9805d762953255f0b4.gif" alt="Cute Panda" class="panda-gif">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJ6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdEq8wK0pY9E2/giphy.gif" class="panda-gif">
             <h1>Hai, Panda Lucuku! 🐼</h1>
-            <p>Tebak ini website buat apa? Tunggu tanggal 21 Mei ya!</p>
-            <div class="heart">❤️</div>
+            <p>Scroll kebawah ya, ada sesuatu buat kamu...</p>
         </div>
-    </div>
+    </section>
+
+    <section id="story" class="full-height">
+        <h2>Our Memory Lane 🐾</h2>
+        <div class="timeline">
+            <div class="moment">
+                <h3>Oktober 2025</h3>
+                <p>Momen awal kita kenal...</p>
+            </div>
+            <div class="moment">
+                <h3>Desember 2025</h3>
+                <p>Pas kita ngerayain akhir tahun bareng...</p>
+            </div>
+            </div>
+    </section>
+
+    <section id="question" class="full-height">
+        <div class="question-container">
+            <h2>Will you be my Panda forever? 🐼</h2>
+            <div class="btn-group">
+                <button id="yesBtn" onclick="alert('I Love You Too, Panda! ❤️')">YES! ❤️</button>
+                <button id="noBtn">NO 😢</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
