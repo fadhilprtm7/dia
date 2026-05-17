@@ -3,50 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Gift for My Panda 🐼</title>
+    <title>Happy 20th Birthday, My Love!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="app-container">
+        
+        <!-- PHASE 1: DUAL-GATE LOCK SCREEN -->
+        <section id="phase1" class="screen active fade-in">
+            <div class="lock-container">
+                <h2>Security Check 💖</h2>
+                
+                <!-- Gate 1 -->
+                <div id="gate1" class="gate">
+                    <p>Masukkan tanggal jadian kita<br><small>(Format: DDMMYYYY)</small></p>
+                    <input type="password" id="anniversary-input" placeholder="Misal: 14022023" maxlength="8">
+                    <p id="error1" class="error-text hidden">Tanggalnya salah, coba lagi sayang!</p>
+                    <button id="btn-gate1" class="btn">Unlock</button>
+                </div>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#story">Our Story</a>
-        <a href="#question">The Question</a>
-    </nav>
+                <!-- Gate 2 (Hidden Initially) -->
+                <div id="gate2" class="gate hidden">
+                    <p>Good! Sekarang, kapan ulang tahunmu?<br><small>(Format: DDMMYYYY)</small></p>
+                    <input type="password" id="birthdate-input" placeholder="Misal: 18052006" maxlength="8">
+                    <p id="error2" class="error-text hidden">Masa lupa ulang tahun sendiri? 🤔</p>
+                    <button id="btn-gate2" class="btn">Unlock</button>
+                </div>
+            </div>
+        </section>
 
-    <section id="home" class="full-height">
-        <div class="card">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJ6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwZ3Z6eXpwJmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/v6aOebdEq8wK0pY9E2/giphy.gif" class="panda-gif">
-            <h1>Hai, Panda Lucuku! 🐼</h1>
-            <p>Scroll kebawah ya, ada sesuatu buat kamu...</p>
+        <!-- PHASE 2: INTERACTIVE LOVE METER -->
+        <section id="phase2" class="screen hidden">
+            <div class="meter-container">
+                <h2>Seberapa sayang kamu ke aku?</h2>
+                <div id="floating-hearts"></div>
+                <h1 id="love-percentage">0%</h1>
+                <input type="range" id="love-slider" min="0" max="100" value="0">
+                <p id="love-message">Geser yaa...</p>
+                <button id="btn-next-phase2" class="btn hidden pulse">Lanjut 💌</button>
+            </div>
+        </section>
+
+        <!-- PHASE 3: INVITATION GATE -->
+        <section id="phase3" class="screen hidden">
+            <div class="invitation-card">
+                <div class="card-content">
+                    <h3>You are invited to</h3>
+                    <h1>The 20th Birthday Party</h1>
+                    <p>Of the most beautiful girl in the world.</p>
+                    <button id="btn-enter" class="btn pulse-heavy">Open Invitation</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 4: MAIN DASHBOARD -->
+        <section id="phase4" class="screen hidden">
+            <div class="dashboard-header">
+                <h2>Welcome, Birthday Girl! 👑</h2>
+                <p>Enjoy your special day</p>
+            </div>
+            
+            <div class="grid-dashboard">
+                <div class="card" data-target="modal-dresscode">
+                    <div class="icon">👗</div>
+                    <h3>Dresscode</h3>
+                </div>
+                <div class="card" data-target="modal-rundown">
+                    <div class="icon">🕒</div>
+                    <h3>Rundown</h3>
+                </div>
+                <div class="card" data-target="modal-letter">
+                    <div class="icon">💌</div>
+                    <h3>Surat Cinta</h3>
+                </div>
+                <div class="card" data-target="modal-venue">
+                    <div class="icon">📍</div>
+                    <h3>Lokasi</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- DETAILS MODAL -->
+        <div id="details-modal" class="modal hidden">
+            <div class="modal-content">
+                <button class="close-btn" id="close-modal">&times;</button>
+                
+                <div id="modal-dresscode" class="modal-body hidden">
+                    <h2>👗 Dresscode Information</h2>
+                    <p>Pakai baju paling cantik yang kamu punya! Tema warna kita hari ini adalah <strong>Pastel Pink & Putih</strong>.</p>
+                </div>
+                
+                <div id="modal-rundown" class="modal-body hidden">
+                    <h2>🕒 Rundown Event</h2>
+                    <ul>
+                        <li><strong>18:00</strong> - Aku jemput kamu</li>
+                        <li><strong>19:00</strong> - Romantic Dinner</li>
+                        <li><strong>21:00</strong> - Buka Kado & Tiup Lilin</li>
+                        <li><strong>22:00</strong> - Stargazing</li>
+                    </ul>
+                </div>
+                
+                <div id="modal-letter" class="modal-body hidden">
+                    <h2>💌 Surat Cinta</h2>
+                    <p>Happy 20th Birthday, sayang!</p>
+                    <p>Terima kasih udah jadi bagian paling indah di hidup aku. Semoga di umur yang baru ini, kamu semakin bahagia, sehat selalu, dan semua yang kamu impikan bisa tercapai.</p>
+                    <p>I love you more than words can say. ❤️</p>
+                </div>
+                
+                <div id="modal-venue" class="modal-body hidden">
+                    <h2>📍 Tempat & Lokasi</h2>
+                    <p>Rahasia dong! Nanti aku jemput ya. Tapi kalau kamu kepo, klik link di bawah:</p>
+                    <a href="#" class="btn" style="display:inline-block; margin-top: 15px;">Google Maps (Placeholder)</a>
+                </div>
+            </div>
         </div>
-    </section>
 
-    <section id="story" class="full-height">
-        <h2>Our Memory Lane 🐾</h2>
-        <div class="timeline">
-            <div class="moment">
-                <h3>Oktober 2025</h3>
-                <p>Momen awal kita kenal...</p>
-            </div>
-            <div class="moment">
-                <h3>Desember 2025</h3>
-                <p>Pas kita ngerayain akhir tahun bareng...</p>
-            </div>
-            </div>
-    </section>
-
-    <section id="question" class="full-height">
-        <div class="question-container">
-            <h2>Will you be my Panda forever? 🐼</h2>
-            <div class="btn-group">
-                <button id="yesBtn" onclick="alert('I Love You Too, Panda! ❤️')">YES! ❤️</button>
-                <button id="noBtn">NO 😢</button>
-            </div>
-        </div>
-    </section>
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
