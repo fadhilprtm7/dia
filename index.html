@@ -99,6 +99,12 @@
         .pin-display { display: flex; gap: 15px; justify-content: center; margin-bottom: 35px; height: 20px; }
         .pin-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-accent); transition: all 0.2s; }
         .pin-dot.filled { background: var(--color-accent); transform: scale(1.2); }
+        .pin-dot.success { background: #4CAF50 !important; border-color: #4CAF50 !important; transform: scale(1.2); }
+
+        /* Gate 2 Distinct Mode */
+        .glass-panel.gate2-mode { background: rgba(255, 235, 242, 0.8); border-color: rgba(255, 105, 180, 0.4); }
+        .glass-panel.gate2-mode .pin-dot { border-color: #ff69b4; }
+        .glass-panel.gate2-mode .pin-dot.filled { background: #ff69b4; }
 
         .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 25px; width: 100%; max-width: 300px; margin: 0 auto; }
         .key-btn {
@@ -210,14 +216,39 @@
         
         /* Header Profile */
         .profile-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 25px; margin-bottom: 25px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            padding: 30px 25px; margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 235, 242, 0.5));
+            border: 1px solid rgba(255, 182, 193, 0.6);
+            box-shadow: 0 12px 35px -5px rgba(255, 182, 193, 0.35);
+            position: relative;
+            overflow: hidden;
         }
-        .profile-date { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-accent); }
-        .profile-zodiac { display: flex; align-items: center; gap: 8px; background: rgba(255,143,171,0.1); padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,143,171,0.3); }
-        .zodiac-svg { width: 24px; height: 24px; stroke: var(--color-accent); animation: pulseStar 2s infinite; }
-        @keyframes pulseStar { 50% { filter: drop-shadow(0 0 5px var(--color-accent)); transform: scale(1.05); } }
-
+        .profile-header::after {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%);
+            opacity: 0.6; animation: rotateGlow 8s linear infinite; pointer-events: none; z-index: 0;
+        }
+        .header-subtitle {
+            font-size: 0.8rem; color: #ff69b4; font-weight: 800; text-transform: uppercase; letter-spacing: 4px;
+            margin-bottom: 8px; z-index: 1; position: relative;
+        }
+        .header-main { 
+            font-family: var(--font-heading); 
+            font-size: 2.6rem; 
+            font-weight: 700; 
+            background: linear-gradient(45deg, var(--color-accent), #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px; line-height: 1.1; z-index: 1; position: relative; text-shadow: 0 4px 10px rgba(255,105,180,0.1);
+        }
+        .header-detail {
+            font-size: 0.9rem; font-weight: 700; color: var(--color-text-main);
+            background: rgba(255, 255, 255, 0.8); padding: 6px 18px; border-radius: 20px;
+            border: 1px solid rgba(255, 182, 193, 0.4); z-index: 1; position: relative; display: inline-block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03); letter-spacing: 0.5px;
+        }
+        
         /* Polarid Marquee Carousel */
         .carousel-wrapper { width: 100vw; margin-left: -20px; margin-bottom: 30px; overflow: hidden; padding: 20px 0; }
         .marquee-track { display: flex; width: max-content; animation: scrollMarquee 20s linear infinite; }
@@ -314,16 +345,30 @@
     <!-- Main SPA Container -->
     <div id="app-root">
 
+        <!-- ==================== PHASE 0: COUNTDOWN ==================== -->
+        <section id="phase0" class="phase-section active">
+            <div class="glass-panel" style="padding: 40px 20px; text-align: center; width: 100%; max-width: 360px;">
+                <h2 style="font-family: var(--font-heading); color: var(--color-accent); margin-bottom: 20px; font-size: 1.8rem; line-height: 1.3;">Menanti detik-detik hari bahagia kamu... 🌸</h2>
+                
+                <div id="countdown-display" style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-main); font-variant-numeric: tabular-nums; margin-bottom: 30px;">
+                    -- d : -- h : -- m : -- s
+                </div>
+                
+                <!-- Beta Testing Skip Button -->
+                <button class="btn-glow" onclick="skipCountdown()" style="font-size: 0.8rem; padding: 8px 20px; border-radius: 15px;">Skip (Beta Test) ⏩</button>
+            </div>
+        </section>
+
         <!-- ==================== PHASE 1: LOCK SCREEN ==================== -->
-        <section id="phase1" class="phase-section active">
+        <section id="phase1" class="phase-section">
             
-            <div class="glass-panel" style="padding: 30px 20px; width: 100%; max-width: 360px;">
+            <div class="glass-panel" style="padding: 30px 20px; width: 100%; max-width: 360px; transition: all 0.5s ease;">
                 <div class="lock-prompt" id="prompt-gate1">
                     <h3>Anniversary Date</h3>
                     <p style="font-size: 0.85rem; color: var(--color-text-light);">Enter passcode to unlock</p>
                 </div>
                 <div class="lock-prompt" id="prompt-gate2" style="display: none;">
-                    <h3>Your Birthdate</h3>
+                    <h3>Next Step: Her Birthdate 🎂</h3>
                     <p style="font-size: 0.85rem; color: var(--color-text-light);">Verify identity (DDMMYYYY)</p>
                 </div>
 
@@ -385,16 +430,9 @@
             
             <!-- Header -->
             <div class="profile-header glass-panel" style="width: 100%;">
-                <div>
-                    <p style="font-size: 0.8rem; color: var(--color-text-light); font-weight: bold; text-transform: uppercase;">Birthdate</p>
-                    <div class="profile-date">21 05 2006</div>
-                </div>
-                <div class="profile-zodiac">
-                    <svg class="zodiac-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 3v18h18"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/>
-                    </svg>
-                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--color-accent);">Gemini</span>
-                </div>
+                <p class="header-subtitle">HARI ISTIMEWAMU</p>
+                <div class="header-main">Dua Dekade<br>Kamu ✨</div>
+                <div class="header-detail">21 Mei 2026 | Happy 20th!</div>
             </div>
 
             <!-- Auto-scrolling Marquee -->
@@ -518,13 +556,58 @@
         // CONFIGURATION & STATE
         // ==========================================================================
         const CONFIG = {
-            gate1_Pin: "14022023", // Anniversary Date
+            gate1_Pin: "12122025", // Anniversary Date
             gate2_Pin: "21052006", // Birthdate
-            pinLength: 8
+            pinLength: 8,
+            targetDate: new Date("May 21, 2026 00:00:00 GMT+0700").getTime() // WIB is GMT+7
         };
         
         let currentPin = "";
         let currentGate = 1;
+        let countdownTimer = null;
+
+        // ==========================================================================
+        // PHASE 0: COUNTDOWN LOGIC
+        // ==========================================================================
+        function initCountdown() {
+            const display = document.getElementById('countdown-display');
+            
+            // Initial check: if already passed the date, skip immediately
+            const now = new Date().getTime();
+            if (now >= CONFIG.targetDate) {
+                skipCountdown();
+                return;
+            }
+            
+            // Update every second
+            countdownTimer = setInterval(() => {
+                const currentTime = new Date().getTime();
+                const distance = CONFIG.targetDate - currentTime;
+                
+                // If countdown finishes organically
+                if (distance < 0) {
+                    clearInterval(countdownTimer);
+                    skipCountdown();
+                    return;
+                }
+                
+                // Math calculations for days, hours, minutes, and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+                display.innerText = `${days}d : ${hours.toString().padStart(2, '0')}h : ${minutes.toString().padStart(2, '0')}m : ${seconds.toString().padStart(2, '0')}s`;
+            }, 1000);
+        }
+
+        function skipCountdown() {
+            if (countdownTimer) clearInterval(countdownTimer);
+            goToPhase('phase1');
+        }
+
+        // Initialize countdown on DOM load
+        window.addEventListener('DOMContentLoaded', initCountdown);
 
         // ==========================================================================
         // UTILITY: PHASE NAVIGATION
@@ -577,14 +660,24 @@
             const keypadUI = document.querySelector('#phase1 .glass-panel');
             
             if (currentGate === 1 && currentPin === CONFIG.gate1_Pin) {
-                // Success Gate 1
-                currentGate = 2;
-                currentPin = "";
-                renderDots();
-                document.getElementById('prompt-gate1').style.display = 'none';
-                const p2 = document.getElementById('prompt-gate2');
-                p2.style.display = 'block';
-                p2.style.animation = 'none'; p2.offsetHeight; p2.style.animation = 'fadeIn 1s forwards'; // retrigger animation
+                // Success Gate 1 - Distinct Visual Feedback
+                const dots = document.querySelectorAll('.pin-dot');
+                dots.forEach(d => d.classList.add('success'));
+                
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                
+                // Wait briefly so she sees the green success dots, then swap to Gate 2 UI
+                setTimeout(() => {
+                    currentGate = 2;
+                    currentPin = "";
+                    keypadUI.classList.add('gate2-mode'); // Color shift
+                    renderDots();
+                    
+                    document.getElementById('prompt-gate1').style.display = 'none';
+                    const p2 = document.getElementById('prompt-gate2');
+                    p2.style.display = 'block';
+                    p2.style.animation = 'none'; p2.offsetHeight; p2.style.animation = 'fadeIn 1s forwards'; // retrigger animation
+                }, 800);
                 
             } else if (currentGate === 2 && currentPin === CONFIG.gate2_Pin) {
                 // Success Gate 2 - Go to Phase 2
