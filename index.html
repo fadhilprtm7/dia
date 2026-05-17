@@ -91,21 +91,18 @@
         /* ==========================================================================
            2. PHASE 1: SMARTPHONE LOCK SCREEN
            ========================================================================== */
-        #phase1 { justify-content: flex-start; padding-top: 15vh; }
-        .clock-container { text-align: center; margin-bottom: 40px; }
-        .digital-clock { font-family: var(--font-body); font-weight: 300; font-size: 5rem; color: var(--color-text-main); letter-spacing: -2px; line-height: 1; }
-        .date-display { font-size: 1.1rem; font-weight: 600; color: var(--color-text-light); margin-top: 5px; }
-
+        #phase1 { justify-content: center; padding: 20px; }
+        
         .lock-prompt { text-align: center; margin-bottom: 20px; animation: fadeIn 1s forwards; }
         .lock-prompt h3 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-accent); }
         
-        .pin-display { display: flex; gap: 15px; justify-content: center; margin-bottom: 40px; height: 20px; }
+        .pin-display { display: flex; gap: 15px; justify-content: center; margin-bottom: 35px; height: 20px; }
         .pin-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-accent); transition: all 0.2s; }
         .pin-dot.filled { background: var(--color-accent); transform: scale(1.2); }
 
-        .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px 30px; width: 100%; max-width: 320px; margin: 0 auto; }
+        .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 25px; width: 100%; max-width: 300px; margin: 0 auto; }
         .key-btn {
-            width: 70px; height: 70px; border-radius: 50%; border: none;
+            width: 65px; height: 65px; border-radius: 50%; border: none;
             background: rgba(255,255,255,0.4); backdrop-filter: blur(10px);
             font-size: 2rem; font-weight: 300; color: var(--color-text-main);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.1s;
@@ -320,11 +317,6 @@
         <!-- ==================== PHASE 1: LOCK SCREEN ==================== -->
         <section id="phase1" class="phase-section active">
             
-            <div class="clock-container">
-                <div class="digital-clock" id="live-clock">00:00</div>
-                <div class="date-display" id="live-date">Selasa, 21 Mei</div>
-            </div>
-
             <div class="glass-panel" style="padding: 30px 20px; width: 100%; max-width: 360px;">
                 <div class="lock-prompt" id="prompt-gate1">
                     <h3>Anniversary Date</h3>
@@ -546,19 +538,6 @@
         // PHASE 1: LOCK SCREEN LOGIC
         // ==========================================================================
         
-        // Live Digital Clock
-        function updateClock() {
-            const now = new Date();
-            let h = now.getHours().toString().padStart(2, '0');
-            let m = now.getMinutes().toString().padStart(2, '0');
-            document.getElementById('live-clock').innerText = `${h}:${m}`;
-            
-            const options = { weekday: 'long', day: 'numeric', month: 'long' };
-            document.getElementById('live-date').innerText = now.toLocaleDateString('id-ID', options);
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
         // Keypad Logic
         const pinContainer = document.getElementById('pin-dots');
         
