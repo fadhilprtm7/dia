@@ -355,7 +355,7 @@
                 </div>
                 
                 <!-- Beta Testing Skip Button -->
-                <button class="btn-glow" onclick="skipCountdown()" style="font-size: 0.8rem; padding: 8px 20px; border-radius: 15px;">Skip (Beta Test) ⏩</button>
+                <button class="btn-glow" onclick="skipCountdown()" style="font-size: 0.8rem; padding: 8px 20px; border-radius: 15px;">Skip</button>
             </div>
         </section>
 
@@ -369,7 +369,7 @@
                 </div>
                 <div class="lock-prompt" id="prompt-gate2" style="display: none;">
                     <h3>Next Step: Her Birthdate 🎂</h3>
-                    <p style="font-size: 0.85rem; color: var(--color-text-light);">Verify identity (DDMMYYYY)</p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-light);">Verify identity (DDMMYY)</p>
                 </div>
 
                 <div class="pin-display" id="pin-dots">
@@ -556,9 +556,9 @@
         // CONFIGURATION & STATE
         // ==========================================================================
         const CONFIG = {
-            gate1_Pin: "12122025", // Anniversary Date
-            gate2_Pin: "21052006", // Birthdate
-            pinLength: 8,
+            gate1_Pin: "000000", // Anniversary Date
+            gate2_Pin: "210506", // Birthdate
+            pinLength: 6,
             targetDate: new Date("May 21, 2026 00:00:00 GMT+0700").getTime() // WIB is GMT+7
         };
         
