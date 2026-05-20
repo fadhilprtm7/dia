@@ -250,17 +250,40 @@
         }
         
         /* Polarid Marquee Carousel */
-        .carousel-wrapper { width: 100vw; margin-left: -20px; margin-bottom: 30px; overflow: hidden; padding: 20px 0; }
-        .marquee-track { display: flex; width: max-content; animation: scrollMarquee 20s linear infinite; }
-        .polaroid {
-            width: 140px; height: 160px; background: #fff; padding: 8px 8px 25px 8px;
-            border-radius: 4px; box-shadow: 0 10px 20px rgba(0,0,0,0.08); margin: 0 15px;
-            display: flex; flex-direction: column;
+        .carousel-wrapper { 
+            width: 100vw; margin-left: -20px; margin-bottom: 30px; overflow: hidden; padding: 20px 0; 
+            /* Soft fade edges for images entering/exiting */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
-        .polaroid img { width: 100%; height: 100%; object-fit: cover; border-radius: 2px; }
-        /* Alternating rotations for polaroids */
-        .polaroid:nth-child(even) { transform: rotate(4deg); }
+        .marquee-track { 
+            display: flex; width: max-content; 
+            /* Increased time to 40s to accommodate 10 photos smoothly */
+            animation: scrollMarquee 40s linear infinite; 
+        }
+        .polaroid {
+            width: 140px; height: 160px; margin: 0 15px;
+            /* Premium Glassmorphism styling */
+            background: rgba(255, 255, 255, 0.7); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.9);
+            padding: 8px 8px 12px 8px; border-radius: 8px; 
+            box-shadow: 0 12px 25px -5px rgba(255, 182, 193, 0.25);
+            display: flex; flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .polaroid img { 
+            width: 100%; height: 110px; object-fit: cover; border-radius: 4px; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+        .polaroid-caption {
+            font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; font-style: italic;
+            color: var(--color-text-main); text-align: center; margin-top: auto;
+        }
+        /* Alternating rotations for polaroids to create a scrapbook feel */
+        .polaroid:nth-child(even) { transform: rotate(3deg); }
         .polaroid:nth-child(odd) { transform: rotate(-3deg); }
+        .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4); }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* Grid Cards */
@@ -438,14 +461,29 @@
             <!-- Auto-scrolling Marquee -->
             <div class="carousel-wrapper">
                 <div class="marquee-track">
-                    <!-- Set 1 -->
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
-                    <!-- Duplicate for infinite loop -->
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
-                    <div class="polaroid"><img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&q=80&w=200&h=250" alt="Memory"></div>
+                    <!-- Set 1 (10 Images) -->
+                    <div class="polaroid"><img src="img/foto1.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
+                    <div class="polaroid"><img src="img/foto2.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
+                    <div class="polaroid"><img src="img/foto3.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
+                    <div class="polaroid"><img src="img/foto4.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+4'" alt="Memory"><span class="polaroid-caption">Sweetest</span></div>
+                    <div class="polaroid"><img src="img/foto5.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+5'" alt="Memory"><span class="polaroid-caption">Memories</span></div>
+                    <div class="polaroid"><img src="img/foto6.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+6'" alt="Memory"><span class="polaroid-caption">Always</span></div>
+                    <div class="polaroid"><img src="img/foto7.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+7'" alt="Memory"><span class="polaroid-caption">Together</span></div>
+                    <div class="polaroid"><img src="img/foto8.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+8'" alt="Memory"><span class="polaroid-caption">My Love</span></div>
+                    <div class="polaroid"><img src="img/foto9.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+9'" alt="Memory"><span class="polaroid-caption">Beautiful</span></div>
+                    <div class="polaroid"><img src="img/foto10.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+10'" alt="Memory"><span class="polaroid-caption">20th! ✨</span></div>
+                    
+                    <!-- Duplicate Set 2 (Crucial for the infinite seamless loop) -->
+                    <div class="polaroid"><img src="img/foto1.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
+                    <div class="polaroid"><img src="img/foto2.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
+                    <div class="polaroid"><img src="img/foto3.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
+                    <div class="polaroid"><img src="img/foto4.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+4'" alt="Memory"><span class="polaroid-caption">Sweetest</span></div>
+                    <div class="polaroid"><img src="img/foto5.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+5'" alt="Memory"><span class="polaroid-caption">Memories</span></div>
+                    <div class="polaroid"><img src="img/foto6.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+6'" alt="Memory"><span class="polaroid-caption">Always</span></div>
+                    <div class="polaroid"><img src="img/foto7.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+7'" alt="Memory"><span class="polaroid-caption">Together</span></div>
+                    <div class="polaroid"><img src="img/foto8.jpg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+8'" alt="Memory"><span class="polaroid-caption">My Love</span></div>
+                    <div class="polaroid"><img src="img/foto9.jpg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+9'" alt="Memory"><span class="polaroid-caption">Beautiful</span></div>
+                    <div class="polaroid"><img src="img/foto10.jpg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+10'" alt="Memory"><span class="polaroid-caption">20th! ✨</span></div>
                 </div>
             </div>
 
