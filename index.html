@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy 20th Birthday, Zaskia! 🤍</title>
     
-    <!-- Premium Google Fonts pairing -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -29,6 +28,7 @@
             
             --shadow-glass: 0 8px 32px 0 rgba(255, 182, 193, 0.15);
             --shadow-float: 0 20px 40px -10px rgba(255, 182, 193, 0.4);
+            --shadow-soft: 0 15px 35px -5px rgba(255, 182, 193, 0.25);
         }
 
         * { 
@@ -48,12 +48,10 @@
             position: relative;
         }
 
-        /* Custom premium scrollbar styling */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--color-secondary); border-radius: 10px; }
 
-        /* Animated Background Blobs */
         .bg-blobs {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden;
             background: linear-gradient(135deg, #FFF0F5, #FFF);
@@ -70,7 +68,6 @@
             100% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
-        /* Glassmorphism System */
         .glass-panel {
             background: var(--color-glass);
             backdrop-filter: blur(16px);
@@ -80,7 +77,6 @@
             border-radius: 30px;
         }
 
-        /* SPA Layout & Transitions */
         #app-root { width: 100%; height: 100%; position: relative; max-width: 500px; margin: 0 auto; overflow: hidden; }
         
         .phase-section {
@@ -91,40 +87,58 @@
         }
         .phase-section.active { opacity: 1; pointer-events: all; transform: scale(1); }
 
-        /* Phase 0 Countdown styling */
         #phase0 { justify-content: center; padding: 20px; }
         .countdown-content { text-align: center; width: 100%; transition: opacity 0.5s ease; }
+        
         .celebration-msg {
             display: none;
             opacity: 0;
             transform: scale(0.85);
-            transition: all 0.6s var(--ease-spring);
-            font-family: var(--font-heading);
-            font-size: 2.2rem;
-            color: var(--color-accent);
+            transition: all 0.8s var(--ease-spring);
             text-align: center;
-            line-height: 1.4;
-            text-shadow: 0 4px 12px rgba(255, 143, 171, 0.2);
+            width: 100%;
         }
         .celebration-msg.active {
             display: block;
             opacity: 1;
             transform: scale(1);
         }
+        
+        .celeb-text-main {
+            font-family: var(--font-heading);
+            font-size: 1.7rem;
+            line-height: 1.5;
+            text-shadow: 0 4px 15px rgba(255, 143, 171, 0.3);
+            background: linear-gradient(to right, #ff8fab, #ff1493, #ff8fab);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shimmerText 3s linear infinite;
+        }
+        @keyframes shimmerText { to { background-position: 200% center; } }
+        
+        .confetti {
+            position: fixed; top: -10vh; z-index: 999; pointer-events: none;
+            animation: fallConfetti 4s linear forwards; font-size: 1.5rem;
+        }
+        @keyframes fallConfetti {
+            0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateY(10vh) rotate(45deg) scale(1); }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
 
-        /* Phase 1 smartphone lock screen styling */
         #phase1 { justify-content: center; padding: 20px; }
         
         .lock-prompt { text-align: center; margin-bottom: 25px; transition: opacity 0.4s var(--ease-apple); }
         .lock-prompt h3 { font-family: var(--font-heading); font-size: 1.8rem; color: var(--color-accent); line-height: 1.3; }
-        .lock-prompt p { font-size: 0.85rem; color: var(--color-text-light); margin-top: 5px; }
         
         .pin-display { display: flex; gap: 15px; justify-content: center; margin-bottom: 35px; height: 20px; }
         .pin-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-accent); transition: all 0.2s; }
         .pin-dot.filled { background: var(--color-accent); transform: scale(1.2); }
         .pin-dot.success { background: #4CAF50 !important; border-color: #4CAF50 !important; transform: scale(1.3); }
 
-        /* Gate 2 Customized Mode styles */
         .glass-panel.gate2-mode { background: rgba(255, 235, 242, 0.8); border-color: rgba(255, 105, 180, 0.4); }
         .glass-panel.gate2-mode .pin-dot { border-color: #ff69b4; }
         .glass-panel.gate2-mode .pin-dot.filled { background: #ff69b4; }
@@ -147,61 +161,36 @@
             40%, 80% { transform: translateX(10px); }
         }
 
-        /* Phase 2 Polymorphic Love Meter elements */
         .meter-wrapper { text-align: center; width: 100%; max-width: 440px; z-index: 2; position: relative; }
         .meter-wrapper h1 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; color: var(--color-accent); line-height: 1.3; }
         
-        /* Central Glowing Pulse Heart container */
         .heart-glowing-wrapper {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 15px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: relative; width: 120px; height: 120px; margin: 0 auto 15px auto;
+            display: flex; align-items: center; justify-content: center;
         }
         .heart-svg {
-            width: 80px;
-            height: 80px;
-            fill: #ff69b4;
+            width: 80px; height: 80px; fill: #ff69b4;
             filter: drop-shadow(0 0 10px rgba(255,105,180,0.6));
-            transform: scale(1);
-            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform: scale(1); transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        /* Dynamic CSS Beat speed configured via custom variables in javascript */
-        .heart-beat-active {
-            animation: beatPulse var(--heart-beat-duration, 1.5s) infinite ease-in-out alternate;
-        }
+        .heart-beat-active { animation: beatPulse var(--heart-beat-duration, 1.5s) infinite ease-in-out alternate; }
         @keyframes beatPulse {
             0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,105,180,0.4)); }
             100% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(255,105,180,0.9)); }
         }
 
         .counter-display { 
-            font-size: 4.5rem; 
-            font-weight: 800; 
-            color: var(--color-accent); 
-            margin-bottom: 25px; 
-            font-variant-numeric: tabular-nums;
+            font-size: 4.5rem; font-weight: 800; color: var(--color-accent); 
+            margin-bottom: 25px; font-variant-numeric: tabular-nums;
             text-shadow: 0 4px 15px rgba(255, 143, 171, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
         
-        /* High-End HTML5 Custom range input container */
         .slider-container { position: relative; width: 100%; height: 50px; margin-bottom: 35px; }
         
         input[type=range] {
-            -webkit-appearance: none; 
-            width: 100%; 
-            height: 14px; 
-            background: transparent; 
-            border-radius: 10px; 
-            outline: none; 
-            position: relative; 
-            z-index: 5;
+            -webkit-appearance: none; width: 100%; height: 14px; background: transparent; 
+            border-radius: 10px; outline: none; position: relative; z-index: 5;
         }
         
         .slider-track {
@@ -215,47 +204,20 @@
             transition: width 0.1s linear; z-index: 2;
         }
 
-        /* Webkit Thumb - Styled as glowing cute solid heart icon */
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; 
-            width: 36px; 
-            height: 36px; 
-            border-radius: 50%;
-            background: #fff; 
-            border: 3.5px solid #ff69b4; 
-            box-shadow: 0 0 15px rgba(255,105,180,0.85);
-            cursor: pointer; 
-            transition: transform 0.1s, box-shadow 0.1s; 
-            margin-top: -11px;
+            -webkit-appearance: none; width: 36px; height: 36px; border-radius: 50%;
+            background: #fff; border: 3.5px solid #ff69b4; box-shadow: 0 0 15px rgba(255,105,180,0.85);
+            cursor: pointer; transition: transform 0.1s, box-shadow 0.1s; margin-top: -11px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff69b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 65%;
+            background-repeat: no-repeat; background-position: center; background-size: 65%;
         }
-        input[type=range]::-webkit-slider-thumb:active { 
-            transform: scale(1.2); 
-            box-shadow: 0 0 25px rgba(255,105,180,1);
-        }
+        input[type=range]::-webkit-slider-thumb:active { transform: scale(1.2); box-shadow: 0 0 25px rgba(255,105,180,1); }
 
-        /* Interactive Particle Emitter canvas element overlay */
-        .emitter-canvas {
-            position: absolute;
-            top: -200px;
-            left: 0;
-            width: 100%;
-            height: 400px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
+        .emitter-canvas { position: absolute; top: -200px; left: 0; width: 100%; height: 400px; pointer-events: none; z-index: 0; }
+        
         .love-status-subtitle {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: var(--color-text-light);
-            margin-top: -15px;
-            margin-bottom: 25px;
-            min-height: 25px;
-            transition: color 0.3s;
+            font-size: 0.95rem; font-weight: 700; color: var(--color-text-light);
+            margin-top: -15px; margin-bottom: 25px; min-height: 25px; transition: color 0.3s;
         }
 
         .btn-proceed {
@@ -267,31 +229,13 @@
         .btn-proceed.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
         .btn-proceed:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 25px 50px -10px rgba(255, 105, 180, 0.6); }
 
-        /* Liquid Shimmer Hover glow element */
         .btn-proceed::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
-            transform: scale(0);
-            transition: transform 0.6s ease-out;
-            pointer-events: none;
+            transform: scale(0); transition: transform 0.6s ease-out; pointer-events: none;
         }
-        .btn-proceed:hover::after {
-            transform: scale(1);
-        }
+        .btn-proceed:hover::after { transform: scale(1); }
 
-        /* Floating Particle elements fallback */
-        .particle { position: absolute; pointer-events: none; animation: floatUp 1s ease-out forwards; z-index: 0; font-size: 1.5rem; }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-120px) scale(1.5); opacity: 0; }
-        }
-
-        /* Phase 3 elements */
         #phase3 { perspective: 1000px; }
         .invitation-card {
             width: 90%; max-width: 360px; padding: 40px 30px; text-align: center;
@@ -319,9 +263,17 @@
         }
         .btn-glow:hover { color: #fff; background: var(--color-accent); border-color: transparent; }
         .btn-glow:hover::before { opacity: 1; }
+        
         @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
+        
+        @keyframes pulseBtnAnim {
+            0% { box-shadow: 0 0 0 0 rgba(255, 143, 171, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 143, 171, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 143, 171, 0); }
+        }
+        
+        .pulse-btn { animation: pulseBtnAnim 2s infinite !important; border-color: transparent; background: var(--color-accent); color: white; }
 
-        /* Fullscreen curtain transitions */
         .curtain {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--color-accent); z-index: 9999;
@@ -330,18 +282,14 @@
         .curtain.active { transform: translateY(0); }
         .curtain.reveal { transform: translateY(-100%); }
 
-        /* Phase 4: Main Elite Dashboard Hub */
         #phase4 { justify-content: flex-start; padding: 30px 20px; overflow-y: auto; overflow-x: hidden; display: block; }
         
-        /* Header Profile with dynamic back glow */
         .profile-header {
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             padding: 35px 25px; margin-bottom: 25px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 235, 242, 0.65));
             border: 1px solid rgba(255, 182, 193, 0.6);
-            box-shadow: 0 12px 35px -5px rgba(255, 182, 193, 0.35);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 12px 35px -5px rgba(255, 182, 193, 0.35); position: relative; overflow: hidden;
         }
         .profile-header::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -353,12 +301,9 @@
             margin-bottom: 8px; z-index: 1; position: relative;
         }
         .header-main { 
-            font-family: var(--font-heading); 
-            font-size: 2.6rem; 
-            font-weight: 700; 
+            font-family: var(--font-heading); font-size: 2.6rem; font-weight: 700; 
             background: linear-gradient(45deg, var(--color-accent), #ff1493);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 12px; line-height: 1.1; z-index: 1; position: relative; text-shadow: 0 4px 10px rgba(255,105,180,0.1);
         }
         .header-detail {
@@ -368,30 +313,20 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.03); letter-spacing: 0.5px;
         }
         
-        /* Auto-scrolling Polaroid Marquee */
         .carousel-wrapper { 
             width: 100vw; margin-left: -20px; margin-bottom: 30px; overflow: hidden; padding: 20px 0; 
             -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
             mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
         }
-        .marquee-track { 
-            display: flex; width: max-content; 
-            animation: scrollMarquee 38s linear infinite; 
-        }
+        .marquee-track { display: flex; width: max-content; animation: scrollMarquee 38s linear infinite; }
         .polaroid {
             width: 140px; height: 160px; margin: 0 15px;
-            background: rgba(255, 255, 255, 0.75); 
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.9);
-            padding: 8px 8px 12px 8px; border-radius: 8px; 
-            box-shadow: 0 12px 25px -5px rgba(255, 182, 193, 0.25);
-            display: flex; flex-direction: column;
+            background: rgba(255, 255, 255, 0.75); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.9); padding: 8px 8px 12px 8px; border-radius: 8px; 
+            box-shadow: 0 12px 25px -5px rgba(255, 182, 193, 0.25); display: flex; flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .polaroid img { 
-            width: 100%; height: 110px; object-fit: cover; border-radius: 4px; 
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-        }
+        .polaroid img { width: 100%; height: 110px; object-fit: cover; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.1); }
         .polaroid-caption {
             font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; font-style: italic;
             color: var(--color-text-main); text-align: center; margin-top: auto;
@@ -401,27 +336,28 @@
         .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4); }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Dashboard grid arrangement */
         .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-bottom: 40px; }
-        .dash-card {
-            background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; padding: 25px 15px;
+        .card-rich {
+            background-color: rgba(255, 255, 255, 0.65);
+            background-image: radial-gradient(rgba(255, 182, 193, 0.3) 1px, transparent 1px);
+            background-size: 10px 10px;
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px dashed rgba(255, 182, 193, 0.8); border-radius: 24px; padding: 25px 15px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.2); cursor: pointer; transition: all 0.3s var(--ease-apple);
+            box-shadow: var(--shadow-soft); cursor: pointer; transition: all 0.3s var(--ease-apple);
             position: relative; overflow: hidden;
         }
-        .dash-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -10px rgba(255, 182, 193, 0.4); background: rgba(255, 255, 255, 0.6); }
-        .dash-card .icon-wrapper { width: 50px; height: 50px; margin-bottom: 15px; background: linear-gradient(135deg, #fff, var(--color-bg-base)); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .dash-card svg { width: 26px; height: 26px; stroke: var(--color-accent); fill: none; stroke-width: 2; transition: transform 0.3s; }
-        .dash-card:hover svg { transform: scale(1.15) rotate(5deg); }
-        .dash-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 5px; }
+        .card-rich:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -10px rgba(255, 182, 193, 0.5); background-color: rgba(255, 255, 255, 0.85); }
+        .card-rich .icon-wrapper { width: 50px; height: 50px; margin-bottom: 15px; background: linear-gradient(135deg, #fff, var(--color-bg-base)); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .card-rich svg { width: 26px; height: 26px; stroke: var(--color-accent); fill: none; stroke-width: 2; transition: transform 0.3s; }
+        .card-rich:hover svg { transform: scale(1.15) rotate(5deg); }
+        .card-rich h3 { font-size: 1.1rem; font-weight: 700; color: var(--color-text-main); margin-bottom: 5px; }
         
         .status-tag { position: absolute; top: 12px; right: 12px; font-size: 0.65rem; font-weight: 800; padding: 4px 8px; border-radius: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
         .tag-unread { background: #ff4d4d; color: white; animation: pulseTag 2s infinite; }
         .tag-info { background: var(--color-secondary); color: white; }
         @keyframes pulseTag { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        /* Modals and Detailed sheets */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px);
@@ -448,7 +384,6 @@
         .modal-view { display: none; }
         .modal-view.active { display: block; animation: fadeIn 0.4s forwards; }
 
-        /* Vertical Interactive Timeline Component */
         .timeline { position: relative; padding-left: 20px; margin-top: 10px; }
         .timeline::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background: var(--color-secondary); opacity: 0.5; }
         .timeline-item { position: relative; margin-bottom: 30px; padding-left: 20px; }
@@ -457,47 +392,27 @@
         .timeline-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
         .timeline-desc { color: var(--color-text-light); font-size: 0.95rem; line-height: 1.5; }
 
-        /* Letter View */
         .letter-paper {
             background: #fffdf5; padding: 30px 20px; border-radius: 15px; border: 1px solid #f2e3c6;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.02); min-height: 300px; font-family: var(--font-heading);
             font-size: 1.1rem; line-height: 1.8; color: #5a4a4a;
         }
 
-        /* Map Embed styling */
         .map-container { width: 100%; height: 250px; border-radius: 20px; overflow: hidden; border: 2px solid var(--color-secondary); margin-bottom: 20px; filter: grayscale(0.2) sepia(0.3) hue-rotate(-30deg); }
         .map-container iframe { width: 100%; height: 100%; border: none; }
 
-        /* Dresscode Stylings without images */
         .dresscode-wrapper {
             background: linear-gradient(135deg, #f7efe2, #ebdcc3);
-            border: 2px dashed #8B5A2B;
-            border-radius: 20px;
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: inset 0 0 20px rgba(139, 90, 43, 0.08);
-            margin-bottom: 15px;
+            border: 2px dashed #8B5A2B; border-radius: 20px; padding: 35px 25px;
+            text-align: center; box-shadow: inset 0 0 20px rgba(139, 90, 43, 0.08); margin-bottom: 15px;
         }
         .dresscode-badge {
-            display: inline-block;
-            background: #8B5A2B;
-            color: #fff;
-            font-size: 1.3rem;
-            font-weight: 800;
-            padding: 10px 25px;
-            border-radius: 25px;
-            margin-bottom: 15px;
-            box-shadow: 0 6px 15px rgba(139, 90, 43, 0.25);
-            letter-spacing: 0.5px;
+            display: inline-block; background: #8B5A2B; color: #fff; font-size: 1.3rem;
+            font-weight: 800; padding: 10px 25px; border-radius: 25px; margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(139, 90, 43, 0.25); letter-spacing: 0.5px;
         }
-        .dresscode-sub {
-            font-size: 1.05rem;
-            color: #5c3e1e;
-            font-weight: 700;
-            font-style: italic;
-        }
+        .dresscode-sub { font-size: 1.05rem; color: #5c3e1e; font-weight: 700; font-style: italic; }
 
-        /* Utility animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -506,59 +421,52 @@
 </head>
 <body>
 
-    <!-- Background Decoration -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Main Single Page Application Wrapper -->
     <div id="app-root">
 
-        <!-- ==================== PHASE 0: COUNTDOWN & CELEBRATION ==================== -->
         <section id="phase0" class="phase-section active">
             <div class="glass-panel" style="padding: 40px 20px; text-align: center; width: 100%; max-width: 360px;">
                 
-                <!-- Normal Active Countdown -->
                 <div id="countdown-box" class="countdown-content">
-                    <h2 style="font-family: var(--font-heading); color: var(--color-accent); margin-bottom: 20px; font-size: 1.8rem; line-height: 1.3;">Menanti detik-detik hari bahagia kamu... 🌸</h2>
+                    <h2 style="font-family: var(--font-heading); color: var(--color-accent); margin-bottom: 20px; font-size: 1.8rem; line-height: 1.3;">menghitung menit menuju hari spesialmu ✨</h2>
                     
-                    <div id="countdown-display" style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-main); font-variant-numeric: tabular-nums; margin-bottom: 30px;">
+                    <div id="countdown-display" style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-main); font-variant-numeric: tabular-nums; margin-bottom: 10px;">
                         -- d : -- h : -- m : -- s
                     </div>
-                    
-                    <button class="btn-glow" onclick="handleCountdownTrigger()" style="font-size: 0.85rem; padding: 8px 25px; border-radius: 15px;">Skip</button>
                 </div>
 
-                <!-- Celebratory Birthday Text -->
+                <!-- Celebratory Birthday Splashes -->
                 <div id="celeb-box" class="celebration-msg">
-                    Happy Birthday my baby lotion! 💖
+                    <div class="celeb-text-main">
+                        20 tahun perjalanan hidupmu, dan aku bersyukur banget bisa nemenin kamu sekarang.<br><br>Happy Birthday, My Baby Lotion! 🎂💖
+                    </div>
+                    <!-- Exclusive Interaction Gate -->
+                    <button class="pulse-btn" id="btn-buka-kado" onclick="revealLockScreen()" style="margin-top: 30px; opacity: 0; padding: 12px 35px; border-radius: 25px; font-weight: 800; cursor: pointer; border: none; font-size: 1.1rem; animation: fadeIn 1s 1.5s forwards, pulseBtnAnim 2s infinite 2.5s;">Buka Kado 🎁</button>
                 </div>
 
             </div>
         </section>
 
-        <!-- ==================== PHASE 1: LOCK SCREEN ==================== -->
         <section id="phase1" class="phase-section">
             <div class="glass-panel" style="padding: 30px 20px; width: 100%; max-width: 360px; transition: all 0.5s ease;">
                 
-                <!-- Gate 1 Anniversary Prompt -->
                 <div class="lock-prompt" id="prompt-gate1">
                     <h3>Anniversary Date</h3>
-                    <p>Enter passcode to unlock</p>
+                    <p style="font-size: 0.85rem; color: var(--color-text-light); margin-top: 5px;">Enter passcode to unlock</p>
                 </div>
 
-                <!-- Gate 2 Birthday Prompt -->
                 <div class="lock-prompt" id="prompt-gate2" style="display: none;">
-                    <h3>Next Step: Zaskia's Birthday 🎂</h3>
+                    <h3>Next Step:<br>Zaskia's Birthday 🎂</h3>
                 </div>
 
-                <!-- Pin dots validation display -->
                 <div class="pin-display" id="pin-dots">
                     <!-- Automatically updated via JS -->
                 </div>
 
-                <!-- Keypad Numeric Layout -->
                 <div class="keypad-grid" id="keypad">
                     <button class="key-btn" onclick="pressKey('1')">1</button>
                     <button class="key-btn" onclick="pressKey('2')">2</button>
@@ -576,12 +484,10 @@
             </div>
         </section>
 
-        <!-- ==================== PHASE 2: LOVE METER ==================== -->
         <section id="phase2" class="phase-section">
             <div class="meter-wrapper glass-panel" style="padding: 40px 20px;">
                 <h1>Seberapa sayang kamu ke aku?</h1>
                 
-                <!-- Pulse beating centerpiece heart -->
                 <div class="heart-glowing-wrapper">
                     <svg class="heart-svg heart-beat-active" id="pulse-heart" viewBox="0 0 24 24">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -590,7 +496,7 @@
 
                 <div class="counter-display" id="love-counter">0%</div>
                 
-                <div class="love-status-subtitle" id="love-status-label">Ayo digeser, tunjukkan rasa sayangmu! 😊</div>
+                <div class="love-status-subtitle" id="love-status-label">ayokk babyy digeser</div>
                 
                 <div class="slider-container">
                     <canvas class="emitter-canvas" id="canvas-emitter"></canvas>
@@ -603,35 +509,31 @@
             </div>
         </section>
 
-        <!-- ==================== PHASE 3: INVITATION CARD ==================== -->
         <section id="phase3" class="phase-section">
             <div class="invitation-card glass-panel" id="tilt-card">
                 <div class="card-inner">
                     <h3>You are invited to</h3>
                     <h1>The 20th Birthday<br>Celebration</h1>
-                    <p style="color: var(--color-text-light); font-size: 0.95rem; margin-top: 15px;">Of the most beautiful soul.</p>
+                    <p style="color: var(--color-text-light); font-size: 1.05rem; font-weight: 600; margin-top: 15px;">for My baby lotion 💖</p>
                     <button class="btn-glow" id="btn-open-invite">Open Invitation</button>
                 </div>
             </div>
         </section>
 
-        <!-- Curtain Transition Component -->
         <div class="curtain" id="curtain"></div>
 
-        <!-- ==================== PHASE 4: THE ELITE DASHBOARD HUB ==================== -->
         <section id="phase4" class="phase-section">
             
-            <!-- Customized Celebratory Header -->
             <div class="profile-header glass-panel" style="width: 100%;">
                 <p class="header-subtitle">HARI ISTIMEWAMU</p>
                 <div class="header-main">Dua Dekade<br>Kamu ✨</div>
                 <div class="header-detail">21 Mei 2026 | Happy 20th!</div>
             </div>
 
-            <!-- Auto-scrolling Photo Marquee (Set 1 & Duplicate Set 2) -->
+            <!-- Auto-scrolling Photo Marquee with exactly 10 original items duplicated for looping -->
             <div class="carousel-wrapper">
                 <div class="marquee-track">
-                    <!-- original Set 1 -->
+                    <!-- Original Set 1 -->
                     <div class="polaroid"><img src="img/foto1.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
                     <div class="polaroid"><img src="img/foto2.jpeg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
                     <div class="polaroid"><img src="img/foto3.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
@@ -643,7 +545,7 @@
                     <div class="polaroid"><img src="img/foto9.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+9'" alt="Memory"><span class="polaroid-caption">Beautiful</span></div>
                     <div class="polaroid"><img src="img/foto10.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+10'" alt="Memory"><span class="polaroid-caption">20th! ✨</span></div>
                     
-                    <!-- Loop duplicates to ensure seamless infinite styling scrolling -->
+                    <!-- Loop duplicates -->
                     <div class="polaroid"><img src="img/foto1.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
                     <div class="polaroid"><img src="img/foto2.jpeg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
                     <div class="polaroid"><img src="img/foto3.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
@@ -657,10 +559,9 @@
                 </div>
             </div>
 
-            <!-- Interative Feature Card Grid -->
             <div class="dashboard-grid">
                 
-                <div class="dash-card" onclick="openModal('modal-dresscode')">
+                <div class="card-rich" onclick="openModal('modal-dresscode')">
                     <span class="status-tag tag-info">Theme</span>
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
@@ -669,7 +570,7 @@
                     <p style="font-size: 0.8rem; color: var(--color-text-light);">Coklat 🤎</p>
                 </div>
 
-                <div class="dash-card" onclick="openModal('modal-rundown')">
+                <div class="card-rich" onclick="openModal('modal-rundown')">
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
                     </div>
@@ -677,7 +578,7 @@
                     <p style="font-size: 0.8rem; color: var(--color-text-light);">Event Schedule</p>
                 </div>
 
-                <div class="dash-card" onclick="openModal('modal-letter')">
+                <div class="card-rich" onclick="openModal('modal-letter')">
                     <span class="status-tag tag-unread">Unread ✉️</span>
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
@@ -686,7 +587,7 @@
                     <p style="font-size: 0.8rem; color: var(--color-text-light);">Just for you</p>
                 </div>
 
-                <div class="dash-card" onclick="openModal('modal-venue')">
+                <div class="card-rich" onclick="openModal('modal-venue')">
                     <div class="icon-wrapper">
                         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
@@ -697,7 +598,6 @@
             </div>
         </section>
 
-        <!-- ==================== MODAL OVERLAY & SHEETS ==================== -->
         <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
         
         <div class="modal-sheet" id="modal-sheet">
@@ -708,79 +608,67 @@
             
             <div class="modal-content-area">
                 
-                <!-- Dresscode View (No Image, Elegant Chocolat Pastel style) -->
                 <div class="modal-view" id="modal-dresscode">
                     <div class="dresscode-wrapper">
                         <div class="dresscode-badge">Dresscode: Coklat 🤎</div>
                         <p class="dresscode-sub">“Pakai baju yang paling bagus yaa sayang!”</p>
                     </div>
-                    <p style="text-align: center; color: var(--color-text-light); line-height: 1.6; margin-top: 15px;">Persiapkan pakaian terbaikmu yang bernuansa cokelat hangat untuk kencan romantis spesial kita malam ini!</p>
                 </div>
 
-                <!-- Rundown View (Highly detailed Indonesian custom timeline) -->
                 <div class="modal-view" id="modal-rundown">
                     <p style="margin-bottom: 20px; font-style: italic; color: var(--color-text-light);">Jadwal kencan spesial kita hari ini:</p>
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">17.00 WIB</div>
-                            <div class="timeline-title">Perjalanan Menjemput My Baby lotion 🚗</div>
-                            <div class="timeline-desc">Aku mulai jalan menjemput kamu, persiapkan dirimu ya manis!</div>
+                            <div class="timeline-time">17.00</div>
+                            <div class="timeline-title">Penjemputan</div>
+                            <div class="timeline-desc">Perjalanan Menjemput My Baby lotion, siap siap yaa sayangku 🚗</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">17.30 WIB</div>
-                            <div class="timeline-title">Sampai di Tempat My baby 🏠</div>
-                            <div class="timeline-desc">Aku sudah sampai di depan rumah kesayangan.</div>
+                            <div class="timeline-time">17.30</div>
+                            <div class="timeline-title">Tiba di Tujuan</div>
+                            <div class="timeline-desc">Aku sampai didepan kos cintaku 🏠</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">17.35 WIB</div>
-                            <div class="timeline-title">Berangkat mengelilingi kota palembang 🌃</div>
-                            <div class="timeline-desc">Jalan-jalan santai menikmati sore romantis Palembang.</div>
+                            <div class="timeline-time">17.35</div>
+                            <div class="timeline-title">City Tour</div>
+                            <div class="timeline-desc">Berangkat mengelilingi kota palembang 🌃</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">18.00 WIB</div>
-                            <div class="timeline-title">Berangkat ke tempat dinner 🍴</div>
-                            <div class="timeline-desc">Menuju lokasi makan malam rahasia yang istimewa.</div>
+                            <div class="timeline-time">18.00</div>
+                            <div class="timeline-title">Menuju Dinner</div>
+                            <div class="timeline-desc">Menuju lokasi makan malam yang istimewa 🍴</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">18.30 WIB</div>
-                            <div class="timeline-title">Pemberian Spesial Gift from me 🎁</div>
-                            <div class="timeline-desc">Kado istimewa dariku untuk merayakan dua dekade kamu.</div>
+                            <div class="timeline-time">18.30</div>
+                            <div class="timeline-title">Special Surprise</div>
+                            <div class="timeline-desc">Kado Istimewa buatanku untuk sayangnya aku 🎁</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">19.00 WIB</div>
-                            <div class="timeline-title">Dinner With You 🕯️</div>
-                            <div class="timeline-desc">Makan malam romantis berdua dengan menu-menu istimewa.</div>
+                            <div class="timeline-time">19.00</div>
+                            <div class="timeline-title">Romantic Dinner</div>
+                            <div class="timeline-desc">Dinner With You 🕯️</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">19.30 WIB</div>
-                            <div class="timeline-title">Take Picture 📸</div>
-                            <div class="timeline-desc">Mengabadikan senyum tercantikmu di momen spesial ini.</div>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-node"></div>
-                            <div class="timeline-time">19.45 WIB</div>
-                            <div class="timeline-title">Sesi have fun yeeyy ✨</div>
-                            <div class="timeline-desc">Membuka lembaran baru penuh tawa gembira bersama.</div>
+                            <div class="timeline-time">19.30</div>
+                            <div class="timeline-title">Capture the Moment</div>
+                            <div class="timeline-desc">Take Picture 📸</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Letter View (Dynamic Typewriter with custom detailed message) -->
                 <div class="modal-view" id="modal-letter">
                     <div class="letter-paper" id="typewriter-text"></div>
                 </div>
 
-                <!-- Venue View (Directly updated to Ten Ryori Palembang) -->
                 <div class="modal-view" id="modal-venue">
                     <div class="map-container">
-                        <!-- Embed Google Maps pointing to general Palembang culinary maps context nicely -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.4449839446215!2d104.75704177579893!3d-2.9739444970020353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b7593c6f423bb%3A0xe2da27d092d6e352!2sTen%20Ryori%20Palembang!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" loading="lazy"></iframe>
                     </div>
                     <h3 style="text-align: center; font-size: 1.3rem; color: var(--color-accent); margin-bottom: 10px;">Ten Ryori Palembang</h3>
@@ -796,7 +684,7 @@
     <script>
         const CONFIG = {
             gate1_Pin: "121225", // Anniversary Date (DDMMYY)
-            gate2_Pin: "210506", // Zaskia's Birthday (DDMMYY - 21-05-2006)
+            gate2_Pin: "210506", // Zaskia's Birthday (DDMMYY)
             pinLength: 6,
             targetDate: new Date("May 21, 2026 00:00:00 GMT+0700").getTime() // WIB Target Date
         };
@@ -805,13 +693,14 @@
         let currentGate = 1;
         let countdownTimer = null;
 
+        // Initialize Countdown check immediately
         function initCountdown() {
             const display = document.getElementById('countdown-display');
             const now = new Date().getTime();
             
-            // Check immediately if target date has arrived/passed
             if (now >= CONFIG.targetDate) {
-                skipCountdownDirect();
+                // Instantly trigger celebration if past target!
+                triggerCelebrationSequence();
                 return;
             }
             
@@ -834,56 +723,39 @@
             }, 1000);
         }
 
-        // Trigger sequence for standard path
         function triggerCelebrationSequence() {
             const countdownBox = document.getElementById('countdown-box');
             const celebBox = document.getElementById('celeb-box');
             
-            // Fade countdown box out
             countdownBox.style.opacity = '0';
             
             setTimeout(() => {
                 countdownBox.style.display = 'none';
                 celebBox.classList.add('active');
                 
-                // Spawn beautiful particle effects around the birthday message
-                for (let i = 0; i < 15; i++) {
-                    setTimeout(() => createCelebrationHeart(), i * 150);
+                // Spawn beautiful Hearts & Petals Confetti Effect
+                const emojis = ['🌸', '💖', '✨', '🤍', '🌸', '🎀'];
+                for (let i = 0; i < 45; i++) {
+                    setTimeout(() => {
+                        const confetti = document.createElement('div');
+                        confetti.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                        confetti.className = 'confetti';
+                        confetti.style.left = (Math.random() * 100) + 'vw';
+                        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's'; // 3-6s fall rate
+                        document.body.appendChild(confetti);
+                        
+                        setTimeout(() => confetti.remove(), 6000);
+                    }, i * 120); // Stagger over roughly 5 seconds
                 }
                 
-                // Allow the beautiful celebratory splash to display for 2.5 seconds
-                setTimeout(() => {
-                    goToPhase('phase1');
-                }, 2800);
-                
+                // Auto transition strictly removed. Awaiting manual user trigger.
             }, 500);
         }
 
-        // Direct skip for quick beta preview
-        function handleCountdownTrigger() {
-            if (countdownTimer) clearInterval(countdownTimer);
-            triggerCelebrationSequence();
-        }
-
-        function skipCountdownDirect() {
-            if (countdownTimer) clearInterval(countdownTimer);
-            goToPhase('phase1');
-        }
-
-        // Create specialized particle hearts for celebratory splash
-        function createCelebrationHeart() {
-            const particle = document.createElement('div');
-            particle.innerHTML = ['💖', '✨', '🌸', '🎂'][Math.floor(Math.random() * 4)];
-            particle.className = 'particle';
-            
-            const rWidth = window.innerWidth;
-            const rHeight = window.innerHeight;
-            
-            particle.style.left = (Math.random() * (rWidth - 40) + 20) + 'px';
-            particle.style.top = (Math.random() * (rHeight - 100) + 50) + 'px';
-            
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 1200);
+        function revealLockScreen() {
+            const celebBox = document.getElementById('celeb-box');
+            celebBox.style.opacity = '0';
+            setTimeout(() => goToPhase('phase1'), 800);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -906,37 +778,27 @@
                 pinContainer.appendChild(dot);
             }
         }
-        renderDots(); // setup initial dots layout state
+        renderDots();
 
         function pressKey(num) {
             if (currentPin.length < CONFIG.pinLength) {
                 currentPin += num;
                 renderDots();
-                
                 if (currentPin.length === CONFIG.pinLength) {
                     setTimeout(validatePin, 300);
                 }
             }
         }
 
-        function deleteKey() {
-            currentPin = currentPin.slice(0, -1);
-            renderDots();
-        }
-        
-        function clearPin() {
-            currentPin = "";
-            renderDots();
-        }
+        function deleteKey() { currentPin = currentPin.slice(0, -1); renderDots(); }
+        function clearPin() { currentPin = ""; renderDots(); }
 
         function validatePin() {
             const keypadUI = document.querySelector('#phase1 .glass-panel');
             
-            // Check anniversary code
             if (currentGate === 1 && currentPin === CONFIG.gate1_Pin) {
                 const dots = document.querySelectorAll('.pin-dot');
                 dots.forEach(d => d.classList.add('success'));
-                
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
                 
                 setTimeout(() => {
@@ -949,22 +811,17 @@
                     setTimeout(() => {
                         document.getElementById('prompt-gate1').style.display = 'none';
                         const p2 = document.getElementById('prompt-gate2');
-                        p2.style.display = 'block';
-                        p2.style.opacity = '0';
+                        p2.style.display = 'block'; p2.style.opacity = '0';
                         setTimeout(() => p2.style.opacity = '1', 50);
                     }, 400);
-                    
                 }, 800);
                 
-            // Check birthday code
             } else if (currentGate === 2 && currentPin === CONFIG.gate2_Pin) {
                 const dots = document.querySelectorAll('.pin-dot');
                 dots.forEach(d => d.classList.add('success'));
                 if (navigator.vibrate) navigator.vibrate([150, 50, 150]);
                 
-                setTimeout(() => {
-                    goToPhase('phase2');
-                }, 800);
+                setTimeout(() => { goToPhase('phase2'); }, 800);
             } else {
                 keypadUI.classList.add('shake');
                 if (navigator.vibrate) navigator.vibrate(200);
@@ -984,26 +841,20 @@
 
         class HeartParticle {
             constructor(x, y) {
-                this.x = x;
-                this.y = y;
+                this.x = x; this.y = y;
                 this.size = Math.random() * 15 + 10;
                 this.speedX = (Math.random() - 0.5) * 6;
                 this.speedY = -Math.random() * 4 - 2;
-                this.alpha = 1;
-                this.decay = Math.random() * 0.015 + 0.01;
+                this.alpha = 1; this.decay = Math.random() * 0.015 + 0.01;
                 this.char = ['💖', '✨', '🌸', '🤍', '🤎'][Math.floor(Math.random() * 5)];
             }
             update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.alpha -= this.decay;
+                this.x += this.speedX; this.y += this.speedY; this.alpha -= this.decay;
                 if (this.size > 2) this.size -= 0.1;
             }
             draw() {
-                ctx.save();
-                ctx.globalAlpha = Math.max(0, this.alpha);
-                ctx.font = `${this.size}px Arial`;
-                ctx.fillText(this.char, this.x, this.y);
+                ctx.save(); ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.font = `${this.size}px Arial`; ctx.fillText(this.char, this.x, this.y);
                 ctx.restore();
             }
         }
@@ -1014,24 +865,18 @@
                 canvas.height = canvas.parentElement.clientHeight;
             }
             window.addEventListener('resize', resize);
-            resize();
-            loopParticles();
+            resize(); loopParticles();
         }
 
         function triggerBurst(x, count) {
-            for (let i = 0; i < count; i++) {
-                particles.push(new HeartParticle(x, canvas.height));
-            }
+            for (let i = 0; i < count; i++) { particles.push(new HeartParticle(x, canvas.height)); }
         }
 
         function loopParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].alpha <= 0) {
-                    particles.splice(i, 1);
-                }
+                particles[i].update(); particles[i].draw();
+                if (particles[i].alpha <= 0) particles.splice(i, 1);
             }
             emitterAnimationId = requestAnimationFrame(loopParticles);
         }
@@ -1042,10 +887,8 @@
         const loveLabel = document.getElementById('love-status-label');
         const pulseHeart = document.getElementById('pulse-heart');
         const btnProceed = document.getElementById('btn-proceed-phase2');
-        
         let currentDisplayedVal = 0;
 
-        // Smooth dynamic tick-up counting animation (Odometer effect)
         function animateCounterValue(targetVal) {
             let start = currentDisplayedVal;
             const duration = 250;
@@ -1054,14 +897,10 @@
             function updateCount(time) {
                 const elapsed = time - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                // Ease out quad
                 const easeVal = progress * (2 - progress);
                 currentDisplayedVal = Math.round(start + (targetVal - start) * easeVal);
                 counter.innerText = `${currentDisplayedVal}%`;
-                
-                if (progress < 1) {
-                    requestAnimationFrame(updateCount);
-                }
+                if (progress < 1) requestAnimationFrame(updateCount);
             }
             requestAnimationFrame(updateCount);
         }
@@ -1069,57 +908,35 @@
         slider.addEventListener('input', (e) => {
             const val = parseInt(e.target.value);
             sliderFill.style.width = `${val}%`;
-            
-            // Animate percentage mathematically
             animateCounterValue(val);
 
-            // Dynamic Beating Heart Pulsing speed logic based on percentage value
-            // Minimum duration is 0.2s (very fast beat), maximum is 1.6s (very slow beat)
             let dur = 1.6 - (val * 0.014);
             pulseHeart.style.setProperty('--heart-beat-duration', `${Math.max(0.2, dur)}s`);
-            
-            // Scale size of the centerpiece heart dynamically
             let scaleVal = 1 + (val * 0.0035);
             pulseHeart.style.transform = `scale(${scaleVal})`;
 
-            // Burst interactive elements on Drag
             const sliderRect = slider.getBoundingClientRect();
             const fillWidthPx = (val / 100) * sliderRect.width;
             
-            // Spawn intense rate as it gets closer to 100%
             let particleChance = val / 100;
             if (Math.random() < particleChance || val === 100) {
                 triggerBurst(fillWidthPx, val === 100 ? 5 : 1);
             }
 
-            // Interactive Text Label logic
-            if (val === 0) {
-                loveLabel.innerText = "Ayo digeser, tunjukkan rasa sayangmu! 😊";
+            // Simplified text logic
+            if (val < 100) {
+                loveLabel.innerText = "ayokk babyy digeser";
                 loveLabel.style.color = 'var(--color-text-light)';
-            } else if (val < 30) {
-                loveLabel.innerText = "Masa segini doang sayangnya? 🥺";
-                loveLabel.style.color = '#c27d88';
-            } else if (val < 70) {
-                loveLabel.innerText = "Wahh bertambahh! Makin sayang yaaa? 😍";
-                loveLabel.style.color = '#e35f83';
-            } else if (val < 100) {
-                loveLabel.innerText = "Hampir penuh! Sedikit lagiii sayanggg... ❤️";
-                loveLabel.style.color = '#ff4081';
+                btnProceed.classList.remove('visible');
             } else {
                 loveLabel.innerText = "YAAAYY! AKU JUGA SAYANG BANGET SAMA KAMU! 💖💖";
                 loveLabel.style.color = '#ff1493';
                 btnProceed.classList.add('visible');
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
             }
-
-            if (val !== 100) {
-                btnProceed.classList.remove('visible');
-            }
         });
 
-        btnProceed.addEventListener('click', () => {
-            goToPhase('phase3');
-        });
+        btnProceed.addEventListener('click', () => { goToPhase('phase3'); });
 
         const tiltCard = document.getElementById('tilt-card');
         const phase3Sec = document.getElementById('phase3');
@@ -1133,7 +950,6 @@
             
             const rotateX = (mouseY / (rect.height / 2)) * -10;
             const rotateY = (mouseX / (rect.width / 2)) * 10;
-            
             tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
@@ -1141,9 +957,7 @@
             tiltCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
             tiltCard.style.transition = `transform 0.5s var(--ease-spring)`;
         });
-        phase3Sec.addEventListener('mouseenter', () => {
-            tiltCard.style.transition = `transform 0.1s`;
-        });
+        phase3Sec.addEventListener('mouseenter', () => { tiltCard.style.transition = `transform 0.1s`; });
 
         document.getElementById('btn-open-invite').addEventListener('click', () => {
             const curtain = document.getElementById('curtain');
@@ -1153,21 +967,17 @@
                 goToPhase('phase4');
                 curtain.classList.remove('active');
                 curtain.classList.add('reveal');
-                
-                setTimeout(() => {
-                    curtain.classList.remove('reveal');
-                }, 800);
+                setTimeout(() => { curtain.classList.remove('reveal'); }, 800);
             }, 800);
         });
 
         const overlay = document.getElementById('modal-overlay');
         const sheet = document.getElementById('modal-sheet');
         const titleEl = document.getElementById('modal-title');
-        
         let typeWriterTimeout = null;
 
         const MODAL_TITLES = {
-            'modal-dresscode': 'Dresscode Detail 👗',
+            'modal-dresscode': 'Dresscode Detail',
             'modal-rundown': 'Event Schedule 🕒',
             'modal-letter': 'Surat Cinta 💌',
             'modal-venue': 'Location Map 📍'
@@ -1191,8 +1001,7 @@
                 
                 function typeWriter() {
                     if (i < letterContent.length) {
-                        const char = letterContent.charAt(i);
-                        twTarget.innerHTML += char;
+                        twTarget.innerHTML += letterContent.charAt(i);
                         i++;
                         typeWriterTimeout = setTimeout(typeWriter, 35);
                     }
@@ -1204,11 +1013,7 @@
         function closeModal() {
             overlay.classList.remove('active');
             sheet.classList.remove('active');
-            
-            if(typeWriterTimeout) {
-                clearTimeout(typeWriterTimeout);
-                typeWriterTimeout = null;
-            }
+            if(typeWriterTimeout) { clearTimeout(typeWriterTimeout); typeWriterTimeout = null; }
         }
     </script>
 </body>
