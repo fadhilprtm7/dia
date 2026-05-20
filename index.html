@@ -3,24 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy 20th Birthday 🤍</title>
+    <title>Happy 20th Birthday, Zaskia! 🤍</title>
     
-    <!-- Premium Fonts -->
+    <!-- Premium Google Fonts pairing -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================================================
-           1. CORE DESIGN TOKENS & RESET
-           ========================================================================== */
         :root {
             --color-primary: #FFB6C1;
             --color-secondary: #FFC0CB;
             --color-accent: #ff8fab;
             --color-bg-base: #FFF5F8;
-            --color-glass: rgba(255, 255, 255, 0.6);
-            --color-glass-border: rgba(255, 255, 255, 0.8);
+            --color-glass: rgba(255, 255, 255, 0.65);
+            --color-glass-border: rgba(255, 255, 255, 0.85);
             --color-text-main: #4a4a4a;
             --color-text-light: #7a7a7a;
             
@@ -34,19 +31,24 @@
             --shadow-float: 0 20px 40px -10px rgba(255, 182, 193, 0.4);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+        }
         
         body {
             font-family: var(--font-body);
             background-color: var(--color-bg-base);
             color: var(--color-text-main);
-            overflow: hidden; /* Prevent native scrolling for SPA */
+            overflow: hidden;
             height: 100vh;
             width: 100vw;
             position: relative;
         }
 
-        /* Custom Scrollbar for inner elements */
+        /* Custom premium scrollbar styling */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: var(--color-secondary); border-radius: 10px; }
@@ -68,7 +70,7 @@
             100% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
-        /* Glassmorphism Utility */
+        /* Glassmorphism System */
         .glass-panel {
             background: var(--color-glass);
             backdrop-filter: blur(16px);
@@ -80,6 +82,7 @@
 
         /* SPA Layout & Transitions */
         #app-root { width: 100%; height: 100%; position: relative; max-width: 500px; margin: 0 auto; overflow: hidden; }
+        
         .phase-section {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -88,20 +91,40 @@
         }
         .phase-section.active { opacity: 1; pointer-events: all; transform: scale(1); }
 
-        /* ==========================================================================
-           2. PHASE 1: SMARTPHONE LOCK SCREEN
-           ========================================================================== */
+        /* Phase 0 Countdown styling */
+        #phase0 { justify-content: center; padding: 20px; }
+        .countdown-content { text-align: center; width: 100%; transition: opacity 0.5s ease; }
+        .celebration-msg {
+            display: none;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: all 0.6s var(--ease-spring);
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            color: var(--color-accent);
+            text-align: center;
+            line-height: 1.4;
+            text-shadow: 0 4px 12px rgba(255, 143, 171, 0.2);
+        }
+        .celebration-msg.active {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Phase 1 smartphone lock screen styling */
         #phase1 { justify-content: center; padding: 20px; }
         
-        .lock-prompt { text-align: center; margin-bottom: 20px; animation: fadeIn 1s forwards; }
-        .lock-prompt h3 { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-accent); }
+        .lock-prompt { text-align: center; margin-bottom: 25px; transition: opacity 0.4s var(--ease-apple); }
+        .lock-prompt h3 { font-family: var(--font-heading); font-size: 1.8rem; color: var(--color-accent); line-height: 1.3; }
+        .lock-prompt p { font-size: 0.85rem; color: var(--color-text-light); margin-top: 5px; }
         
         .pin-display { display: flex; gap: 15px; justify-content: center; margin-bottom: 35px; height: 20px; }
         .pin-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--color-accent); transition: all 0.2s; }
         .pin-dot.filled { background: var(--color-accent); transform: scale(1.2); }
-        .pin-dot.success { background: #4CAF50 !important; border-color: #4CAF50 !important; transform: scale(1.2); }
+        .pin-dot.success { background: #4CAF50 !important; border-color: #4CAF50 !important; transform: scale(1.3); }
 
-        /* Gate 2 Distinct Mode */
+        /* Gate 2 Customized Mode styles */
         .glass-panel.gate2-mode { background: rgba(255, 235, 242, 0.8); border-color: rgba(255, 105, 180, 0.4); }
         .glass-panel.gate2-mode .pin-dot { border-color: #ff69b4; }
         .glass-panel.gate2-mode .pin-dot.filled { background: #ff69b4; }
@@ -109,13 +132,13 @@
         .keypad-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 25px; width: 100%; max-width: 300px; margin: 0 auto; }
         .key-btn {
             width: 65px; height: 65px; border-radius: 50%; border: none;
-            background: rgba(255,255,255,0.4); backdrop-filter: blur(10px);
-            font-size: 2rem; font-weight: 300; color: var(--color-text-main);
+            background: rgba(255,255,255,0.45); backdrop-filter: blur(10px);
+            font-size: 1.8rem; font-weight: 300; color: var(--color-text-main);
             box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; transition: all 0.1s;
             display: flex; align-items: center; justify-content: center; justify-self: center;
         }
         .key-btn:active { background: rgba(255,182,193,0.5); transform: scale(0.9); }
-        .key-btn.text-key { font-size: 1rem; font-weight: 600; }
+        .key-btn.text-key { font-size: 0.95rem; font-weight: 600; }
 
         .shake { animation: screenShake 0.4s var(--ease-spring); }
         @keyframes screenShake {
@@ -124,57 +147,155 @@
             40%, 80% { transform: translateX(10px); }
         }
 
-        /* ==========================================================================
-           3. PHASE 2: POLYMORPHIC LOVE METER
-           ========================================================================== */
-        .meter-wrapper { text-align: center; width: 100%; max-width: 400px; z-index: 2; }
-        .meter-wrapper h1 { font-family: var(--font-heading); font-size: 2.2rem; margin-bottom: 30px; color: var(--color-accent); }
+        /* Phase 2 Polymorphic Love Meter elements */
+        .meter-wrapper { text-align: center; width: 100%; max-width: 440px; z-index: 2; position: relative; }
+        .meter-wrapper h1 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 20px; color: var(--color-accent); line-height: 1.3; }
         
-        .counter-display { font-size: 4rem; font-weight: 800; color: var(--color-text-main); margin-bottom: 40px; font-variant-numeric: tabular-nums; }
-        
-        .slider-container { position: relative; width: 100%; height: 40px; margin-bottom: 50px; }
-        input[type=range] {
-            -webkit-appearance: none; width: 100%; height: 12px; background: transparent; border-radius: 10px; outline: none; position: relative; z-index: 5;
+        /* Central Glowing Pulse Heart container */
+        .heart-glowing-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        /* Custom Track styling simulated behind input */
+        .heart-svg {
+            width: 80px;
+            height: 80px;
+            fill: #ff69b4;
+            filter: drop-shadow(0 0 10px rgba(255,105,180,0.6));
+            transform: scale(1);
+            transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        /* Dynamic CSS Beat speed configured via custom variables in javascript */
+        .heart-beat-active {
+            animation: beatPulse var(--heart-beat-duration, 1.5s) infinite ease-in-out alternate;
+        }
+        @keyframes beatPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255,105,180,0.4)); }
+            100% { transform: scale(1.15); filter: drop-shadow(0 0 25px rgba(255,105,180,0.9)); }
+        }
+
+        .counter-display { 
+            font-size: 4.5rem; 
+            font-weight: 800; 
+            color: var(--color-accent); 
+            margin-bottom: 25px; 
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 4px 15px rgba(255, 143, 171, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* High-End HTML5 Custom range input container */
+        .slider-container { position: relative; width: 100%; height: 50px; margin-bottom: 35px; }
+        
+        input[type=range] {
+            -webkit-appearance: none; 
+            width: 100%; 
+            height: 14px; 
+            background: transparent; 
+            border-radius: 10px; 
+            outline: none; 
+            position: relative; 
+            z-index: 5;
+        }
+        
         .slider-track {
             position: absolute; top: 50%; left: 0; transform: translateY(-50%);
-            width: 100%; height: 12px; border-radius: 10px; background: #e0e0e0; z-index: 1; overflow: hidden;
+            width: 100%; height: 14px; border-radius: 10px; background: rgba(255, 255, 255, 0.55); border: 1.5px solid rgba(255, 182, 193, 0.4); z-index: 1; overflow: hidden;
         }
         .slider-fill {
             position: absolute; top: 0; left: 0; height: 100%; width: 0%;
-            background: linear-gradient(90deg, #FFB6C1, #ff69b4); transition: width 0.1s linear; z-index: 2;
+            background: linear-gradient(90deg, #FFB6C1 0%, #ff69b4 100%); 
+            box-shadow: 0 0 12px rgba(255, 105, 180, 0.6);
+            transition: width 0.1s linear; z-index: 2;
         }
 
+        /* Webkit Thumb - Styled as glowing cute solid heart icon */
         input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 35px; height: 35px; border-radius: 50%;
-            background: #fff; border: 3px solid var(--color-accent); box-shadow: 0 0 15px rgba(255,105,180,0.4);
-            cursor: pointer; transition: transform 0.1s; margin-top: -12px;
+            -webkit-appearance: none; 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%;
+            background: #fff; 
+            border: 3.5px solid #ff69b4; 
+            box-shadow: 0 0 15px rgba(255,105,180,0.85);
+            cursor: pointer; 
+            transition: transform 0.1s, box-shadow 0.1s; 
+            margin-top: -11px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ff69b4"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 65%;
         }
-        input[type=range]::-webkit-slider-thumb:active { transform: scale(1.1); }
+        input[type=range]::-webkit-slider-thumb:active { 
+            transform: scale(1.2); 
+            box-shadow: 0 0 25px rgba(255,105,180,1);
+        }
+
+        /* Interactive Particle Emitter canvas element overlay */
+        .emitter-canvas {
+            position: absolute;
+            top: -200px;
+            left: 0;
+            width: 100%;
+            height: 400px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .love-status-subtitle {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text-light);
+            margin-top: -15px;
+            margin-bottom: 25px;
+            min-height: 25px;
+            transition: color 0.3s;
+        }
 
         .btn-proceed {
             padding: 15px 40px; font-size: 1.2rem; font-weight: 700; color: #fff; border: none; border-radius: 30px;
             background: linear-gradient(45deg, #ff8fab, #ff69b4); cursor: pointer; box-shadow: var(--shadow-float);
             transition: all 0.4s var(--ease-spring); opacity: 0; pointer-events: none; transform: translateY(20px);
+            position: relative; overflow: hidden;
         }
         .btn-proceed.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
         .btn-proceed:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 25px 50px -10px rgba(255, 105, 180, 0.6); }
 
-        /* Particles */
+        /* Liquid Shimmer Hover glow element */
+        .btn-proceed::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%);
+            transform: scale(0);
+            transition: transform 0.6s ease-out;
+            pointer-events: none;
+        }
+        .btn-proceed:hover::after {
+            transform: scale(1);
+        }
+
+        /* Floating Particle elements fallback */
         .particle { position: absolute; pointer-events: none; animation: floatUp 1s ease-out forwards; z-index: 0; font-size: 1.5rem; }
         @keyframes floatUp {
             0% { transform: translateY(0) scale(0.5); opacity: 1; }
-            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+            100% { transform: translateY(-120px) scale(1.5); opacity: 0; }
         }
 
-        /* ==========================================================================
-           4. PHASE 3: 3D INVITATION CARD
-           ========================================================================== */
+        /* Phase 3 elements */
         #phase3 { perspective: 1000px; }
         .invitation-card {
             width: 90%; max-width: 360px; padding: 40px 30px; text-align: center;
-            transform-style: preserve-3d; transition: transform 0.1s; /* JS handles tilt */
+            transform-style: preserve-3d; transition: transform 0.1s;
         }
         .invitation-card::before {
             content: ''; position: absolute; inset: 0; border-radius: 30px; padding: 2px;
@@ -182,7 +303,7 @@
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
         }
-        .card-inner { transform: translateZ(30px); /* 3D pop effect */ }
+        .card-inner { transform: translateZ(30px); }
         .card-inner h3 { font-family: var(--font-body); font-weight: 600; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem; color: var(--color-text-light); margin-bottom: 10px; }
         .card-inner h1 { font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-accent); margin-bottom: 20px; line-height: 1.2; }
         
@@ -200,7 +321,7 @@
         .btn-glow:hover::before { opacity: 1; }
         @keyframes rotateGlow { 100% { transform: rotate(360deg); } }
 
-        /* Curtain Transition Element */
+        /* Fullscreen curtain transitions */
         .curtain {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--color-accent); z-index: 9999;
@@ -209,16 +330,14 @@
         .curtain.active { transform: translateY(0); }
         .curtain.reveal { transform: translateY(-100%); }
 
-        /* ==========================================================================
-           5. PHASE 4: THE ELITE DASHBOARD HUB
-           ========================================================================== */
+        /* Phase 4: Main Elite Dashboard Hub */
         #phase4 { justify-content: flex-start; padding: 30px 20px; overflow-y: auto; overflow-x: hidden; display: block; }
         
-        /* Header Profile */
+        /* Header Profile with dynamic back glow */
         .profile-header {
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
-            padding: 30px 25px; margin-bottom: 25px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 235, 242, 0.5));
+            padding: 35px 25px; margin-bottom: 25px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(255, 235, 242, 0.65));
             border: 1px solid rgba(255, 182, 193, 0.6);
             box-shadow: 0 12px 35px -5px rgba(255, 182, 193, 0.35);
             position: relative;
@@ -226,7 +345,7 @@
         }
         .profile-header::after {
             content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 60%);
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 65%);
             opacity: 0.6; animation: rotateGlow 8s linear infinite; pointer-events: none; z-index: 0;
         }
         .header-subtitle {
@@ -244,27 +363,24 @@
         }
         .header-detail {
             font-size: 0.9rem; font-weight: 700; color: var(--color-text-main);
-            background: rgba(255, 255, 255, 0.8); padding: 6px 18px; border-radius: 20px;
+            background: rgba(255, 255, 255, 0.85); padding: 6px 18px; border-radius: 20px;
             border: 1px solid rgba(255, 182, 193, 0.4); z-index: 1; position: relative; display: inline-block;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03); letter-spacing: 0.5px;
         }
         
-        /* Polarid Marquee Carousel */
+        /* Auto-scrolling Polaroid Marquee */
         .carousel-wrapper { 
             width: 100vw; margin-left: -20px; margin-bottom: 30px; overflow: hidden; padding: 20px 0; 
-            /* Soft fade edges for images entering/exiting */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
         }
         .marquee-track { 
             display: flex; width: max-content; 
-            /* Increased time to 40s to accommodate 10 photos smoothly */
-            animation: scrollMarquee 40s linear infinite; 
+            animation: scrollMarquee 38s linear infinite; 
         }
         .polaroid {
             width: 140px; height: 160px; margin: 0 15px;
-            /* Premium Glassmorphism styling */
-            background: rgba(255, 255, 255, 0.7); 
+            background: rgba(255, 255, 255, 0.75); 
             backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255,255,255,0.9);
             padding: 8px 8px 12px 8px; border-radius: 8px; 
@@ -280,16 +396,15 @@
             font-family: var(--font-heading); font-size: 0.8rem; font-weight: 600; font-style: italic;
             color: var(--color-text-main); text-align: center; margin-top: auto;
         }
-        /* Alternating rotations for polaroids to create a scrapbook feel */
         .polaroid:nth-child(even) { transform: rotate(3deg); }
         .polaroid:nth-child(odd) { transform: rotate(-3deg); }
         .polaroid:hover { transform: scale(1.05) rotate(0deg); z-index: 10; box-shadow: 0 15px 30px rgba(255, 182, 193, 0.4); }
         @keyframes scrollMarquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Grid Cards */
+        /* Dashboard grid arrangement */
         .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding-bottom: 40px; }
         .dash-card {
-            background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.7); border-radius: 24px; padding: 25px 15px;
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
             box-shadow: 0 10px 25px -5px rgba(255, 182, 193, 0.2); cursor: pointer; transition: all 0.3s var(--ease-apple);
@@ -306,9 +421,7 @@
         .tag-info { background: var(--color-secondary); color: white; }
         @keyframes pulseTag { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
 
-        /* ==========================================================================
-           6. MODAL SYSTEM & DETAILED PAGES
-           ========================================================================== */
+        /* Modals and Detailed sheets */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(5px);
@@ -335,7 +448,7 @@
         .modal-view { display: none; }
         .modal-view.active { display: block; animation: fadeIn 0.4s forwards; }
 
-        /* Timeline Component (Rundown) */
+        /* Vertical Interactive Timeline Component */
         .timeline { position: relative; padding-left: 20px; margin-top: 10px; }
         .timeline::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background: var(--color-secondary); opacity: 0.5; }
         .timeline-item { position: relative; margin-bottom: 30px; padding-left: 20px; }
@@ -344,61 +457,108 @@
         .timeline-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
         .timeline-desc { color: var(--color-text-light); font-size: 0.95rem; line-height: 1.5; }
 
-        /* Typewriter (Surat Cinta) */
+        /* Letter View */
         .letter-paper {
             background: #fffdf5; padding: 30px 20px; border-radius: 15px; border: 1px solid #f2e3c6;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.02); min-height: 300px; font-family: var(--font-heading);
             font-size: 1.1rem; line-height: 1.8; color: #5a4a4a;
         }
 
-        /* Map Iframe Styling */
+        /* Map Embed styling */
         .map-container { width: 100%; height: 250px; border-radius: 20px; overflow: hidden; border: 2px solid var(--color-secondary); margin-bottom: 20px; filter: grayscale(0.2) sepia(0.3) hue-rotate(-30deg); }
         .map-container iframe { width: 100%; height: 100%; border: none; }
 
+        /* Dresscode Stylings without images */
+        .dresscode-wrapper {
+            background: linear-gradient(135deg, #f7efe2, #ebdcc3);
+            border: 2px dashed #8B5A2B;
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            box-shadow: inset 0 0 20px rgba(139, 90, 43, 0.08);
+            margin-bottom: 15px;
+        }
+        .dresscode-badge {
+            display: inline-block;
+            background: #8B5A2B;
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 800;
+            padding: 10px 25px;
+            border-radius: 25px;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(139, 90, 43, 0.25);
+            letter-spacing: 0.5px;
+        }
+        .dresscode-sub {
+            font-size: 1.05rem;
+            color: #5c3e1e;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        /* Utility animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Background Layer -->
+    <!-- Background Decoration -->
     <div class="bg-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
 
-    <!-- Main SPA Container -->
+    <!-- Main Single Page Application Wrapper -->
     <div id="app-root">
 
-        <!-- ==================== PHASE 0: COUNTDOWN ==================== -->
+        <!-- ==================== PHASE 0: COUNTDOWN & CELEBRATION ==================== -->
         <section id="phase0" class="phase-section active">
             <div class="glass-panel" style="padding: 40px 20px; text-align: center; width: 100%; max-width: 360px;">
-                <h2 style="font-family: var(--font-heading); color: var(--color-accent); margin-bottom: 20px; font-size: 1.8rem; line-height: 1.3;">Menanti detik-detik hari bahagia kamu... 🌸</h2>
                 
-                <div id="countdown-display" style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-main); font-variant-numeric: tabular-nums; margin-bottom: 30px;">
-                    -- d : -- h : -- m : -- s
+                <!-- Normal Active Countdown -->
+                <div id="countdown-box" class="countdown-content">
+                    <h2 style="font-family: var(--font-heading); color: var(--color-accent); margin-bottom: 20px; font-size: 1.8rem; line-height: 1.3;">Menanti detik-detik hari bahagia kamu... 🌸</h2>
+                    
+                    <div id="countdown-display" style="font-size: 1.6rem; font-weight: 800; color: var(--color-text-main); font-variant-numeric: tabular-nums; margin-bottom: 30px;">
+                        -- d : -- h : -- m : -- s
+                    </div>
+                    
+                    <button class="btn-glow" onclick="handleCountdownTrigger()" style="font-size: 0.85rem; padding: 8px 25px; border-radius: 15px;">Skip</button>
                 </div>
-                
-                <!-- Beta Testing Skip Button -->
-                <button class="btn-glow" onclick="skipCountdown()" style="font-size: 0.8rem; padding: 8px 20px; border-radius: 15px;">Skip</button>
+
+                <!-- Celebratory Birthday Text -->
+                <div id="celeb-box" class="celebration-msg">
+                    Happy Birthday my baby lotion! 💖
+                </div>
+
             </div>
         </section>
 
         <!-- ==================== PHASE 1: LOCK SCREEN ==================== -->
         <section id="phase1" class="phase-section">
-            
             <div class="glass-panel" style="padding: 30px 20px; width: 100%; max-width: 360px; transition: all 0.5s ease;">
+                
+                <!-- Gate 1 Anniversary Prompt -->
                 <div class="lock-prompt" id="prompt-gate1">
                     <h3>Anniversary Date</h3>
-                    <p style="font-size: 0.85rem; color: var(--color-text-light);">Enter passcode to unlock</p>
+                    <p>Enter passcode to unlock</p>
                 </div>
+
+                <!-- Gate 2 Birthday Prompt -->
                 <div class="lock-prompt" id="prompt-gate2" style="display: none;">
-                    <h3>Next Step: Her Birthdate 🎂</h3>
-                    <p style="font-size: 0.85rem; color: var(--color-text-light);">Verify identity (DDMMYY)</p>
+                    <h3>Next Step: Zaskia's Birthday 🎂</h3>
                 </div>
 
+                <!-- Pin dots validation display -->
                 <div class="pin-display" id="pin-dots">
-                    <!-- Dots injected via JS -->
+                    <!-- Automatically updated via JS -->
                 </div>
 
+                <!-- Keypad Numeric Layout -->
                 <div class="keypad-grid" id="keypad">
                     <button class="key-btn" onclick="pressKey('1')">1</button>
                     <button class="key-btn" onclick="pressKey('2')">2</button>
@@ -421,9 +581,19 @@
             <div class="meter-wrapper glass-panel" style="padding: 40px 20px;">
                 <h1>Seberapa sayang kamu ke aku?</h1>
                 
+                <!-- Pulse beating centerpiece heart -->
+                <div class="heart-glowing-wrapper">
+                    <svg class="heart-svg heart-beat-active" id="pulse-heart" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+
                 <div class="counter-display" id="love-counter">0%</div>
                 
+                <div class="love-status-subtitle" id="love-status-label">Ayo digeser, tunjukkan rasa sayangmu! 😊</div>
+                
                 <div class="slider-container">
+                    <canvas class="emitter-canvas" id="canvas-emitter"></canvas>
                     <div class="slider-track"></div>
                     <div class="slider-fill" id="slider-fill"></div>
                     <input type="range" id="love-slider" min="0" max="100" value="0">
@@ -433,7 +603,7 @@
             </div>
         </section>
 
-        <!-- ==================== PHASE 3: INVITATION ==================== -->
+        <!-- ==================== PHASE 3: INVITATION CARD ==================== -->
         <section id="phase3" class="phase-section">
             <div class="invitation-card glass-panel" id="tilt-card">
                 <div class="card-inner">
@@ -445,23 +615,23 @@
             </div>
         </section>
 
-        <!-- Curtain Transition -->
+        <!-- Curtain Transition Component -->
         <div class="curtain" id="curtain"></div>
 
-        <!-- ==================== PHASE 4: DASHBOARD HUB ==================== -->
+        <!-- ==================== PHASE 4: THE ELITE DASHBOARD HUB ==================== -->
         <section id="phase4" class="phase-section">
             
-            <!-- Header -->
+            <!-- Customized Celebratory Header -->
             <div class="profile-header glass-panel" style="width: 100%;">
                 <p class="header-subtitle">HARI ISTIMEWAMU</p>
                 <div class="header-main">Dua Dekade<br>Kamu ✨</div>
                 <div class="header-detail">21 Mei 2026 | Happy 20th!</div>
             </div>
 
-            <!-- Auto-scrolling Marquee -->
+            <!-- Auto-scrolling Photo Marquee (Set 1 & Duplicate Set 2) -->
             <div class="carousel-wrapper">
                 <div class="marquee-track">
-                    <!-- Set 1 (10 Images) -->
+                    <!-- original Set 1 -->
                     <div class="polaroid"><img src="img/foto1.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
                     <div class="polaroid"><img src="img/foto2.jpeg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
                     <div class="polaroid"><img src="img/foto3.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
@@ -473,7 +643,7 @@
                     <div class="polaroid"><img src="img/foto9.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+9'" alt="Memory"><span class="polaroid-caption">Beautiful</span></div>
                     <div class="polaroid"><img src="img/foto10.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+10'" alt="Memory"><span class="polaroid-caption">20th! ✨</span></div>
                     
-                    <!-- Duplicate Set 2 (Crucial for the infinite seamless loop) -->
+                    <!-- Loop duplicates to ensure seamless infinite styling scrolling -->
                     <div class="polaroid"><img src="img/foto1.jpeg" onerror="this.src='https://placehold.co/200x250/FFB6C1/FFF?text=Foto+1'" alt="Memory"><span class="polaroid-caption">Momen Favorit</span></div>
                     <div class="polaroid"><img src="img/foto2.jpeg" onerror="this.src='https://placehold.co/200x250/FFC0CB/FFF?text=Foto+2'" alt="Memory"><span class="polaroid-caption">Happy Times</span></div>
                     <div class="polaroid"><img src="img/foto3.jpeg" onerror="this.src='https://placehold.co/200x250/ff8fab/FFF?text=Foto+3'" alt="Memory"><span class="polaroid-caption">Us ❤️</span></div>
@@ -487,7 +657,7 @@
                 </div>
             </div>
 
-            <!-- Grid Cards -->
+            <!-- Interative Feature Card Grid -->
             <div class="dashboard-grid">
                 
                 <div class="dash-card" onclick="openModal('modal-dresscode')">
@@ -496,7 +666,7 @@
                         <svg viewBox="0 0 24 24"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
                     </div>
                     <h3>Dresscode</h3>
-                    <p style="font-size: 0.8rem; color: var(--color-text-light);">Pink & White</p>
+                    <p style="font-size: 0.8rem; color: var(--color-text-light);">Coklat 🤎</p>
                 </div>
 
                 <div class="dash-card" onclick="openModal('modal-rundown')">
@@ -521,7 +691,7 @@
                         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
                     <h3>Lokasi</h3>
-                    <p style="font-size: 0.8rem; color: var(--color-text-light);">The Secret Place</p>
+                    <p style="font-size: 0.8rem; color: var(--color-text-light);">Ten Ryori Palembang</p>
                 </div>
 
             </div>
@@ -538,50 +708,84 @@
             
             <div class="modal-content-area">
                 
-                <!-- Dresscode View -->
+                <!-- Dresscode View (No Image, Elegant Chocolat Pastel style) -->
                 <div class="modal-view" id="modal-dresscode">
-                    <img src="https://images.unsplash.com/photo-1596464716127-f2a82984de30?auto=format&fit=crop&w=400&q=80" alt="Dress" style="width:100%; border-radius: 15px; margin-bottom: 20px;">
-                    <p>Malam ini tema kita adalah <strong>Soft Pastel Pink & Creamy White</strong>. Pakai baju yang paling bikin kamu merasa cantik dan nyaman. Aku udah siapin kejutan manis buat cocokin outfit kamu!</p>
+                    <div class="dresscode-wrapper">
+                        <div class="dresscode-badge">Dresscode: Coklat 🤎</div>
+                        <p class="dresscode-sub">“Pakai baju yang paling bagus yaa sayang!”</p>
+                    </div>
+                    <p style="text-align: center; color: var(--color-text-light); line-height: 1.6; margin-top: 15px;">Persiapkan pakaian terbaikmu yang bernuansa cokelat hangat untuk kencan romantis spesial kita malam ini!</p>
                 </div>
 
-                <!-- Rundown View -->
+                <!-- Rundown View (Highly detailed Indonesian custom timeline) -->
                 <div class="modal-view" id="modal-rundown">
                     <p style="margin-bottom: 20px; font-style: italic; color: var(--color-text-light);">Jadwal kencan spesial kita hari ini:</p>
                     <div class="timeline">
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">18:30 WIB</div>
-                            <div class="timeline-title">Penjemputan Tuan Putri 🚗</div>
-                            <div class="timeline-desc">Aku sampai di depan rumah. Pastikan kamu udah siap ya!</div>
+                            <div class="timeline-time">17.00 WIB</div>
+                            <div class="timeline-title">Perjalanan Menjemput My Baby lotion 🚗</div>
+                            <div class="timeline-desc">Aku mulai jalan menjemput kamu, persiapkan dirimu ya manis!</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">19:15 WIB</div>
-                            <div class="timeline-title">Romantic Dinner 🍽️</div>
-                            <div class="timeline-desc">Makan malam spesial dengan menu kesukaan kamu.</div>
+                            <div class="timeline-time">17.30 WIB</div>
+                            <div class="timeline-title">Sampai di Tempat My baby 🏠</div>
+                            <div class="timeline-desc">Aku sudah sampai di depan rumah kesayangan.</div>
                         </div>
                         <div class="timeline-item">
                             <div class="timeline-node"></div>
-                            <div class="timeline-time">21:00 WIB</div>
-                            <div class="timeline-title">Make a Wish 🎂</div>
-                            <div class="timeline-desc">Waktunya tiup lilin, potong kue, dan buka kado!</div>
+                            <div class="timeline-time">17.35 WIB</div>
+                            <div class="timeline-title">Berangkat mengelilingi kota palembang 🌃</div>
+                            <div class="timeline-desc">Jalan-jalan santai menikmati sore romantis Palembang.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-time">18.00 WIB</div>
+                            <div class="timeline-title">Berangkat ke tempat dinner 🍴</div>
+                            <div class="timeline-desc">Menuju lokasi makan malam rahasia yang istimewa.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-time">18.30 WIB</div>
+                            <div class="timeline-title">Pemberian Spesial Gift from me 🎁</div>
+                            <div class="timeline-desc">Kado istimewa dariku untuk merayakan dua dekade kamu.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-time">19.00 WIB</div>
+                            <div class="timeline-title">Dinner With You 🕯️</div>
+                            <div class="timeline-desc">Makan malam romantis berdua dengan menu-menu istimewa.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-time">19.30 WIB</div>
+                            <div class="timeline-title">Take Picture 📸</div>
+                            <div class="timeline-desc">Mengabadikan senyum tercantikmu di momen spesial ini.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-node"></div>
+                            <div class="timeline-time">19.45 WIB</div>
+                            <div class="timeline-title">Sesi have fun yeeyy ✨</div>
+                            <div class="timeline-desc">Membuka lembaran baru penuh tawa gembira bersama.</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Letter View (Typewriter) -->
+                <!-- Letter View (Dynamic Typewriter with custom detailed message) -->
                 <div class="modal-view" id="modal-letter">
                     <div class="letter-paper" id="typewriter-text"></div>
                 </div>
 
-                <!-- Venue View -->
+                <!-- Venue View (Directly updated to Ten Ryori Palembang) -->
                 <div class="modal-view" id="modal-venue">
                     <div class="map-container">
-                        <!-- Placeholder Iframe (Eiffel tower coords for romantic aesthetic) -->
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9914406081493!2d2.292292615674477!3d48.85837360866272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66e2964e34e2d%3A0x8ddca9ee380ef7e0!2sEiffel%20Tower!5e0!3m2!1sen!2sid!4v1683908080649!5m2!1sen!2sid" loading="lazy"></iframe>
+                        <!-- Embed Google Maps pointing to general Palembang culinary maps context nicely -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.4449839446215!2d104.75704177579893!3d-2.9739444970020353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b7593c6f423bb%3A0xe2da27d092d6e352!2sTen%20Ryori%20Palembang!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid" loading="lazy"></iframe>
                     </div>
-                    <p style="margin-bottom: 20px; text-align: center;">Ini rahasia ya tempat aslinya, tapi kurang lebih suasananya bakal romantis kayak di peta ini. See you there!</p>
-                    <button class="btn-glow" style="width: 100%;" onclick="window.open('https://maps.google.com')">Open in Google Maps</button>
+                    <h3 style="text-align: center; font-size: 1.3rem; color: var(--color-accent); margin-bottom: 10px;">Ten Ryori Palembang</h3>
+                    <p style="margin-bottom: 20px; text-align: center; line-height: 1.5; color: var(--color-text-light);">Tempat makan malam bernuansa tenang dan romantis yang sudah kupilihkan untukmu sayang. See you there!</p>
+                    <button class="btn-glow" style="width: 100%; border-color: var(--color-accent);" onclick="window.open('https://maps.app.goo.gl/sjiUUrZKtFNt9Rxm9')">Buka di Google Maps 🗺️</button>
                 </div>
 
             </div>
@@ -590,46 +794,37 @@
     </div>
 
     <script>
-        // ==========================================================================
-        // CONFIGURATION & STATE
-        // ==========================================================================
         const CONFIG = {
-            gate1_Pin: "000000", // Anniversary Date
-            gate2_Pin: "210506", // Birthdate
+            gate1_Pin: "121225", // Anniversary Date (DDMMYY)
+            gate2_Pin: "210506", // Zaskia's Birthday (DDMMYY - 21-05-2006)
             pinLength: 6,
-            targetDate: new Date("May 21, 2026 00:00:00 GMT+0700").getTime() // WIB is GMT+7
+            targetDate: new Date("May 21, 2026 00:00:00 GMT+0700").getTime() // WIB Target Date
         };
         
         let currentPin = "";
         let currentGate = 1;
         let countdownTimer = null;
 
-        // ==========================================================================
-        // PHASE 0: COUNTDOWN LOGIC
-        // ==========================================================================
         function initCountdown() {
             const display = document.getElementById('countdown-display');
-            
-            // Initial check: if already passed the date, skip immediately
             const now = new Date().getTime();
+            
+            // Check immediately if target date has arrived/passed
             if (now >= CONFIG.targetDate) {
-                skipCountdown();
+                skipCountdownDirect();
                 return;
             }
             
-            // Update every second
             countdownTimer = setInterval(() => {
                 const currentTime = new Date().getTime();
                 const distance = CONFIG.targetDate - currentTime;
                 
-                // If countdown finishes organically
                 if (distance < 0) {
                     clearInterval(countdownTimer);
-                    skipCountdown();
+                    triggerCelebrationSequence();
                     return;
                 }
                 
-                // Math calculations for days, hours, minutes, and seconds
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -639,27 +834,68 @@
             }, 1000);
         }
 
-        function skipCountdown() {
+        // Trigger sequence for standard path
+        function triggerCelebrationSequence() {
+            const countdownBox = document.getElementById('countdown-box');
+            const celebBox = document.getElementById('celeb-box');
+            
+            // Fade countdown box out
+            countdownBox.style.opacity = '0';
+            
+            setTimeout(() => {
+                countdownBox.style.display = 'none';
+                celebBox.classList.add('active');
+                
+                // Spawn beautiful particle effects around the birthday message
+                for (let i = 0; i < 15; i++) {
+                    setTimeout(() => createCelebrationHeart(), i * 150);
+                }
+                
+                // Allow the beautiful celebratory splash to display for 2.5 seconds
+                setTimeout(() => {
+                    goToPhase('phase1');
+                }, 2800);
+                
+            }, 500);
+        }
+
+        // Direct skip for quick beta preview
+        function handleCountdownTrigger() {
+            if (countdownTimer) clearInterval(countdownTimer);
+            triggerCelebrationSequence();
+        }
+
+        function skipCountdownDirect() {
             if (countdownTimer) clearInterval(countdownTimer);
             goToPhase('phase1');
         }
 
-        // Initialize countdown on DOM load
-        window.addEventListener('DOMContentLoaded', initCountdown);
+        // Create specialized particle hearts for celebratory splash
+        function createCelebrationHeart() {
+            const particle = document.createElement('div');
+            particle.innerHTML = ['💖', '✨', '🌸', '🎂'][Math.floor(Math.random() * 4)];
+            particle.className = 'particle';
+            
+            const rWidth = window.innerWidth;
+            const rHeight = window.innerHeight;
+            
+            particle.style.left = (Math.random() * (rWidth - 40) + 20) + 'px';
+            particle.style.top = (Math.random() * (rHeight - 100) + 50) + 'px';
+            
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 1200);
+        }
 
-        // ==========================================================================
-        // UTILITY: PHASE NAVIGATION
-        // ==========================================================================
+        window.addEventListener('DOMContentLoaded', () => {
+            initCountdown();
+            initParticleCanvas();
+        });
+
         function goToPhase(phaseId) {
             document.querySelectorAll('.phase-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById(phaseId).classList.add('active');
         }
 
-        // ==========================================================================
-        // PHASE 1: LOCK SCREEN LOGIC
-        // ==========================================================================
-        
-        // Keypad Logic
         const pinContainer = document.getElementById('pin-dots');
         
         function renderDots() {
@@ -670,14 +906,13 @@
                 pinContainer.appendChild(dot);
             }
         }
-        renderDots(); // Initial render
+        renderDots(); // setup initial dots layout state
 
         function pressKey(num) {
             if (currentPin.length < CONFIG.pinLength) {
                 currentPin += num;
                 renderDots();
                 
-                // Check PIN when full
                 if (currentPin.length === CONFIG.pinLength) {
                     setTimeout(validatePin, 300);
                 }
@@ -697,33 +932,41 @@
         function validatePin() {
             const keypadUI = document.querySelector('#phase1 .glass-panel');
             
+            // Check anniversary code
             if (currentGate === 1 && currentPin === CONFIG.gate1_Pin) {
-                // Success Gate 1 - Distinct Visual Feedback
                 const dots = document.querySelectorAll('.pin-dot');
                 dots.forEach(d => d.classList.add('success'));
                 
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
                 
-                // Wait briefly so she sees the green success dots, then swap to Gate 2 UI
                 setTimeout(() => {
                     currentGate = 2;
                     currentPin = "";
-                    keypadUI.classList.add('gate2-mode'); // Color shift
+                    keypadUI.classList.add('gate2-mode');
                     renderDots();
                     
-                    document.getElementById('prompt-gate1').style.display = 'none';
-                    const p2 = document.getElementById('prompt-gate2');
-                    p2.style.display = 'block';
-                    p2.style.animation = 'none'; p2.offsetHeight; p2.style.animation = 'fadeIn 1s forwards'; // retrigger animation
+                    document.getElementById('prompt-gate1').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('prompt-gate1').style.display = 'none';
+                        const p2 = document.getElementById('prompt-gate2');
+                        p2.style.display = 'block';
+                        p2.style.opacity = '0';
+                        setTimeout(() => p2.style.opacity = '1', 50);
+                    }, 400);
+                    
                 }, 800);
                 
+            // Check birthday code
             } else if (currentGate === 2 && currentPin === CONFIG.gate2_Pin) {
-                // Success Gate 2 - Go to Phase 2
-                goToPhase('phase2');
+                const dots = document.querySelectorAll('.pin-dot');
+                dots.forEach(d => d.classList.add('success'));
+                if (navigator.vibrate) navigator.vibrate([150, 50, 150]);
+                
+                setTimeout(() => {
+                    goToPhase('phase2');
+                }, 800);
             } else {
-                // Error Shake
                 keypadUI.classList.add('shake');
-                // Haptic feedback if supported
                 if (navigator.vibrate) navigator.vibrate(200);
                 
                 setTimeout(() => {
@@ -734,85 +977,174 @@
             }
         }
 
-        // ==========================================================================
-        // PHASE 2: LOVE METER LOGIC
-        // ==========================================================================
+        const canvas = document.getElementById('canvas-emitter');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let emitterAnimationId;
+
+        class HeartParticle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 15 + 10;
+                this.speedX = (Math.random() - 0.5) * 6;
+                this.speedY = -Math.random() * 4 - 2;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
+                this.char = ['💖', '✨', '🌸', '🤍', '🤎'][Math.floor(Math.random() * 5)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.alpha -= this.decay;
+                if (this.size > 2) this.size -= 0.1;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.font = `${this.size}px Arial`;
+                ctx.fillText(this.char, this.x, this.y);
+                ctx.restore();
+            }
+        }
+
+        function initParticleCanvas() {
+            function resize() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+            loopParticles();
+        }
+
+        function triggerBurst(x, count) {
+            for (let i = 0; i < count; i++) {
+                particles.push(new HeartParticle(x, canvas.height));
+            }
+        }
+
+        function loopParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            emitterAnimationId = requestAnimationFrame(loopParticles);
+        }
+
         const slider = document.getElementById('love-slider');
         const sliderFill = document.getElementById('slider-fill');
         const counter = document.getElementById('love-counter');
+        const loveLabel = document.getElementById('love-status-label');
+        const pulseHeart = document.getElementById('pulse-heart');
         const btnProceed = document.getElementById('btn-proceed-phase2');
+        
+        let currentDisplayedVal = 0;
+
+        // Smooth dynamic tick-up counting animation (Odometer effect)
+        function animateCounterValue(targetVal) {
+            let start = currentDisplayedVal;
+            const duration = 250;
+            const startTime = performance.now();
+            
+            function updateCount(time) {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                // Ease out quad
+                const easeVal = progress * (2 - progress);
+                currentDisplayedVal = Math.round(start + (targetVal - start) * easeVal);
+                counter.innerText = `${currentDisplayedVal}%`;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCount);
+                }
+            }
+            requestAnimationFrame(updateCount);
+        }
 
         slider.addEventListener('input', (e) => {
-            const val = e.target.value;
+            const val = parseInt(e.target.value);
             sliderFill.style.width = `${val}%`;
-            counter.innerText = `${val}%`;
+            
+            // Animate percentage mathematically
+            animateCounterValue(val);
 
-            // Particle Emitter
-            if (Math.random() > 0.4) {
-                createParticle(e.clientX, e.clientY);
+            // Dynamic Beating Heart Pulsing speed logic based on percentage value
+            // Minimum duration is 0.2s (very fast beat), maximum is 1.6s (very slow beat)
+            let dur = 1.6 - (val * 0.014);
+            pulseHeart.style.setProperty('--heart-beat-duration', `${Math.max(0.2, dur)}s`);
+            
+            // Scale size of the centerpiece heart dynamically
+            let scaleVal = 1 + (val * 0.0035);
+            pulseHeart.style.transform = `scale(${scaleVal})`;
+
+            // Burst interactive elements on Drag
+            const sliderRect = slider.getBoundingClientRect();
+            const fillWidthPx = (val / 100) * sliderRect.width;
+            
+            // Spawn intense rate as it gets closer to 100%
+            let particleChance = val / 100;
+            if (Math.random() < particleChance || val === 100) {
+                triggerBurst(fillWidthPx, val === 100 ? 5 : 1);
             }
 
-            // Unlock Button
-            if (val == 100) {
-                btnProceed.classList.add('visible');
-                counter.style.color = 'var(--color-accent)';
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]); // Happy vibration
+            // Interactive Text Label logic
+            if (val === 0) {
+                loveLabel.innerText = "Ayo digeser, tunjukkan rasa sayangmu! 😊";
+                loveLabel.style.color = 'var(--color-text-light)';
+            } else if (val < 30) {
+                loveLabel.innerText = "Masa segini doang sayangnya? 🥺";
+                loveLabel.style.color = '#c27d88';
+            } else if (val < 70) {
+                loveLabel.innerText = "Wahh bertambahh! Makin sayang yaaa? 😍";
+                loveLabel.style.color = '#e35f83';
+            } else if (val < 100) {
+                loveLabel.innerText = "Hampir penuh! Sedikit lagiii sayanggg... ❤️";
+                loveLabel.style.color = '#ff4081';
             } else {
+                loveLabel.innerText = "YAAAYY! AKU JUGA SAYANG BANGET SAMA KAMU! 💖💖";
+                loveLabel.style.color = '#ff1493';
+                btnProceed.classList.add('visible');
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            }
+
+            if (val !== 100) {
                 btnProceed.classList.remove('visible');
-                counter.style.color = 'var(--color-text-main)';
             }
         });
-
-        function createParticle(x, y) {
-            const particle = document.createElement('div');
-            particle.innerHTML = ['💖', '✨', '🤍'][Math.floor(Math.random() * 3)];
-            particle.className = 'particle';
-            
-            // Randomize position near the thumb
-            const offsetX = (Math.random() - 0.5) * 40;
-            particle.style.left = (x + offsetX - 10) + 'px';
-            particle.style.top = (y - 30) + 'px';
-            
-            document.body.appendChild(particle);
-            setTimeout(() => particle.remove(), 1000);
-        }
 
         btnProceed.addEventListener('click', () => {
             goToPhase('phase3');
         });
 
-        // ==========================================================================
-        // PHASE 3: 3D INVITATION CARD
-        // ==========================================================================
         const tiltCard = document.getElementById('tilt-card');
+        const phase3Sec = document.getElementById('phase3');
         
-        // Apply tilt effect on mousemove
-        document.getElementById('phase3').addEventListener('mousemove', (e) => {
+        phase3Sec.addEventListener('mousemove', (e) => {
             const rect = tiltCard.getBoundingClientRect();
-            // Calculate center of card
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-            // Calculate cursor position relative to center
             const mouseX = e.clientX - centerX;
             const mouseY = e.clientY - centerY;
             
-            // Calculate rotation (max 15 degrees)
             const rotateX = (mouseY / (rect.height / 2)) * -10;
             const rotateY = (mouseX / (rect.width / 2)) * 10;
             
             tiltCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
-        // Reset tilt on mouseleave
-        document.getElementById('phase3').addEventListener('mouseleave', () => {
+        phase3Sec.addEventListener('mouseleave', () => {
             tiltCard.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
             tiltCard.style.transition = `transform 0.5s var(--ease-spring)`;
         });
-        document.getElementById('phase3').addEventListener('mouseenter', () => {
-            tiltCard.style.transition = `transform 0.1s`; // Remove transition for smooth tracking
+        phase3Sec.addEventListener('mouseenter', () => {
+            tiltCard.style.transition = `transform 0.1s`;
         });
 
-        // Curtain Transition to Phase 4
         document.getElementById('btn-open-invite').addEventListener('click', () => {
             const curtain = document.getElementById('curtain');
             curtain.classList.add('active');
@@ -822,16 +1154,12 @@
                 curtain.classList.remove('active');
                 curtain.classList.add('reveal');
                 
-                // Reset curtain position after animation
                 setTimeout(() => {
                     curtain.classList.remove('reveal');
                 }, 800);
             }, 800);
         });
 
-        // ==========================================================================
-        // PHASE 5: MODAL SYSTEM & TYPEWRITER
-        // ==========================================================================
         const overlay = document.getElementById('modal-overlay');
         const sheet = document.getElementById('modal-sheet');
         const titleEl = document.getElementById('modal-title');
@@ -839,27 +1167,23 @@
         let typeWriterTimeout = null;
 
         const MODAL_TITLES = {
-            'modal-dresscode': 'Dresscode Detail',
-            'modal-rundown': 'Event Schedule',
+            'modal-dresscode': 'Dresscode Detail 👗',
+            'modal-rundown': 'Event Schedule 🕒',
             'modal-letter': 'Surat Cinta 💌',
-            'modal-venue': 'Location Map'
+            'modal-venue': 'Location Map 📍'
         };
 
-        const letterContent = `Halo sayangku,\n\nSelamat ulang tahun yang ke-20! 🎉\n\nRasanya waktu cepet banget berlalu ya? Di umur kamu yang baru ini, aku cuma mau bilang terima kasih. Terima kasih udah jadi orang yang paling sabar, paling baik, dan paling cantik di hidup aku.\n\nSemoga di usia 20 ini, semua mimpi-mimpi kamu pelan-pelan terwujud. Aku janji bakal terus ada di samping kamu buat nemenin prosesnya.\n\nI love you to the moon, and back. ❤️\n\n- Yours, Always.`;
+        const letterContent = "Haii sayangg... Selamat Ulang Tahun yang Ke-20 Baby. Ga kerasa yaa waktu cepet banget berlaluu. Semoga di umur kamu yang sekarang, kamu menjadi pribadi yang lebih baik lagii dan segala apa yang diinginkan tercapaii amiinn. Makasihh yaa sayangg, sudahh menemani perjalanan aku sejauh ini. Sudah menjadi orang yang paling sabar, penyayang dan paling cantik di hidup aku. Aku bahagia bisa kenal kamu dan menjadi pasanganmu babyy. Semoga setiap rintangan dan halangan nanti kedepannya bisa kita jalani bareng bareng yaa sayang. Akuu janjii bakalan selaluu ada disamping kamuu. I love you babyy ❤️";
 
         function openModal(viewId) {
-            // Set Title
             titleEl.innerText = MODAL_TITLES[viewId] || 'Details';
             
-            // Hide all views, show targeted view
             document.querySelectorAll('.modal-view').forEach(v => v.classList.remove('active'));
             document.getElementById(viewId).classList.add('active');
             
-            // Open Modal UI
             overlay.classList.add('active');
             sheet.classList.add('active');
 
-            // Handle Typewriter specifically for Letter view
             if (viewId === 'modal-letter') {
                 const twTarget = document.getElementById('typewriter-text');
                 twTarget.innerHTML = '';
@@ -867,14 +1191,12 @@
                 
                 function typeWriter() {
                     if (i < letterContent.length) {
-                        // Handle line breaks
                         const char = letterContent.charAt(i);
-                        twTarget.innerHTML += char === '\n' ? '<br>' : char;
+                        twTarget.innerHTML += char;
                         i++;
-                        typeWriterTimeout = setTimeout(typeWriter, 40); // typing speed
+                        typeWriterTimeout = setTimeout(typeWriter, 35);
                     }
                 }
-                // start typing after slide up animation
                 setTimeout(typeWriter, 500); 
             }
         }
@@ -883,13 +1205,11 @@
             overlay.classList.remove('active');
             sheet.classList.remove('active');
             
-            // Stop typewriter if running
             if(typeWriterTimeout) {
                 clearTimeout(typeWriterTimeout);
                 typeWriterTimeout = null;
             }
         }
-
     </script>
 </body>
 </html>
